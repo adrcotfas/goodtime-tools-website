@@ -1,0 +1,14 @@
+site:
+  title: "Goodtime Tools"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/goodtime.js"
+      api: "build/libs/goodtime.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/goodtime.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
