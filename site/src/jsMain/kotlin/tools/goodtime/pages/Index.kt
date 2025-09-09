@@ -1,10 +1,12 @@
 package tools.goodtime.pages
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.FontStyle
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -27,12 +29,10 @@ import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.ColorPalettes
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.fr
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
+import com.varabyte.kobweb.compose.css.TextAlign
 import tools.goodtime.HeadlineTextStyle
 import tools.goodtime.SubheadlineTextStyle
 import tools.goodtime.components.layouts.PageLayoutData
@@ -80,64 +80,206 @@ fun initHomePage(ctx: InitRouteContext) {
 @Layout(".components.layouts.PageLayout")
 @Composable
 fun HomePage() {
-    Row(HeroContainerStyle.toModifier()) {
-        Box {
-            val sitePalette = ColorMode.current.toSitePalette()
+    Column(Modifier.fillMaxWidth()) {
+        // Hero Section
+        HeroSection()
 
-            Column(Modifier.gap(2.cssRem)) {
-                Div(HeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "Use this template as your starting point for ", Modifier.color(
-                            when (ColorMode.current) {
-                                ColorMode.LIGHT -> Colors.Black
-                                ColorMode.DARK -> Colors.White
-                            }
-                        )
-                    )
-                    SpanText(
-                        "Kobweb",
-                        Modifier
-                            .color(sitePalette.brand.accent)
-                            // Use a shadow so this light-colored word is more visible in light mode
-                            .textShadow(0.px, 0.px, blurRadius = 0.5.cssRem, color = Colors.Gray)
-                    )
-                }
+        // Download Section
+        DownloadSection()
 
-                Div(SubheadlineTextStyle.toAttrs()) {
-                    SpanText("You can read the ")
-                    Link("/about", "About")
-                    SpanText(" page for more information.")
-                }
+        // Features Section
+        FeaturesSection()
 
-                val ctx = rememberPageContext()
-                Button(onClick = {
-                    // Change this click handler with your call-to-action behavior
-                    // here. Link to an order page? Open a calendar UI? Play a movie?
-                    // Up to you!
-                    ctx.router.tryRoutingTo("/about")
-                }, colorPalette = ColorPalettes.Blue) {
-                    Text("This could be your CTA")
-                }
+        // Testimonials Section
+        TestimonialsSection()
+    }
+}
+
+@Composable
+private fun HeroSection() {
+    val sitePalette = ColorMode.current.toSitePalette()
+
+    Div(
+        Modifier
+            .fillMaxWidth()
+            .minHeight(80.vh)
+            .display(DisplayStyle.Flex)
+            .flexDirection(FlexDirection.Column)
+            .justifyContent(JustifyContent.Center)
+            .alignItems(AlignItems.Center)
+            .padding(2.cssRem)
+            .toAttrs()
+    ) {
+        Div(Modifier.textAlign(TextAlign.Center).toAttrs()) {
+            SpanText(
+                "Welcome to Goodtime Productivity",
+                Modifier
+                    .fontSize(3.cssRem)
+                    .fontWeight(700)
+                    .color(sitePalette.brand.primary)
+                    .margin(bottom = 1.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            SpanText(
+                "Boost your productivity with our innovative tools and features designed to help you work smarter, not harder.",
+                Modifier
+                    .fontSize(1.2.cssRem)
+                    .color(Colors.Gray)
+                    .maxWidth(40.cssRem)
+                    .margin(bottom = 2.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            Button(
+                onClick = { /* TODO: Scroll to download section */ },
+                colorPalette = ColorPalettes.Blue,
+                modifier = Modifier.fontSize(1.1.cssRem).padding(1.cssRem, 2.cssRem)
+            ) {
+                Text("Get Started")
             }
         }
+    }
+}
 
-        Div(
-            HomeGridStyle
-            .toModifier()
-            .displayIfAtLeast(Breakpoint.MD)
-            .grid {
-                rows { repeat(3) { size(1.fr) } }
-                columns { repeat(5) { size(1.fr) } }
-            }
+@Composable
+private fun DownloadSection() {
+    Div(
+        Modifier
+            .id("download")
+            .fillMaxWidth()
+            .minHeight(60.vh)
+            .backgroundColor(ColorMode.current.toSitePalette().nearBackground)
+            .display(DisplayStyle.Flex)
+            .flexDirection(FlexDirection.Column)
+            .justifyContent(JustifyContent.Center)
+            .alignItems(AlignItems.Center)
+            .padding(2.cssRem)
             .toAttrs()
-        ) {
-            val sitePalette = ColorMode.current.toSitePalette()
-            GridCell(sitePalette.brand.primary, 1, 1, 2, 2)
-            GridCell(ColorPalettes.Monochrome._600, 1, 3)
-            GridCell(ColorPalettes.Monochrome._100, 1, 4, width = 2)
-            GridCell(sitePalette.brand.accent, 2, 3, width = 2)
-            GridCell(ColorPalettes.Monochrome._300, 2, 5)
-            GridCell(ColorPalettes.Monochrome._800, 3, 1, width = 5)
+    ) {
+        Div(Modifier.textAlign(TextAlign.Center).toAttrs()) {
+            SpanText(
+                "Download Now",
+                Modifier
+                    .fontSize(2.5.cssRem)
+                    .fontWeight(700)
+                    .color(ColorMode.current.toSitePalette().brand.primary)
+                    .margin(bottom = 1.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            SpanText(
+                "Get the latest version of our productivity tools for Windows, macOS, and Linux.",
+                Modifier
+                    .fontSize(1.1.cssRem)
+                    .color(Colors.Gray)
+                    .maxWidth(35.cssRem)
+                    .margin(bottom = 2.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            Button(
+                onClick = { /* TODO: Download action */ },
+                colorPalette = ColorPalettes.Green,
+                modifier = Modifier.fontSize(1.1.cssRem).padding(1.cssRem, 2.cssRem)
+            ) {
+                Text("Download for Free")
+            }
+        }
+    }
+}
+
+@Composable
+private fun FeaturesSection() {
+    Div(
+        Modifier
+            .id("features")
+            .fillMaxWidth()
+            .minHeight(60.vh)
+            .display(DisplayStyle.Flex)
+            .flexDirection(FlexDirection.Column)
+            .justifyContent(JustifyContent.Center)
+            .alignItems(AlignItems.Center)
+            .padding(2.cssRem)
+            .toAttrs()
+    ) {
+        Div(Modifier.textAlign(TextAlign.Center).toAttrs()) {
+            SpanText(
+                "Powerful Features",
+                Modifier
+                    .fontSize(2.5.cssRem)
+                    .fontWeight(700)
+                    .color(ColorMode.current.toSitePalette().brand.primary)
+                    .margin(bottom = 1.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            SpanText(
+                "Discover the features that make our productivity tools stand out from the competition.",
+                Modifier
+                    .fontSize(1.1.cssRem)
+                    .color(Colors.Gray)
+                    .maxWidth(35.cssRem)
+                    .margin(bottom = 3.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            // Placeholder for feature items
+            SpanText(
+                "Feature showcase coming soon...",
+                Modifier
+                    .fontSize(1.cssRem)
+                    .color(Colors.Gray)
+                    .fontStyle(FontStyle.Italic)
+            )
+        }
+    }
+}
+
+@Composable
+private fun TestimonialsSection() {
+    Div(
+        Modifier
+            .id("testimonials")
+            .fillMaxWidth()
+            .minHeight(60.vh)
+            .backgroundColor(ColorMode.current.toSitePalette().nearBackground)
+            .display(DisplayStyle.Flex)
+            .flexDirection(FlexDirection.Column)
+            .justifyContent(JustifyContent.Center)
+            .alignItems(AlignItems.Center)
+            .padding(2.cssRem)
+            .toAttrs()
+    ) {
+        Div(Modifier.textAlign(TextAlign.Center).toAttrs()) {
+            SpanText(
+                "What Our Users Say",
+                Modifier
+                    .fontSize(2.5.cssRem)
+                    .fontWeight(700)
+                    .color(ColorMode.current.toSitePalette().brand.primary)
+                    .margin(bottom = 1.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            SpanText(
+                "See how our tools have helped users improve their productivity and workflow.",
+                Modifier
+                    .fontSize(1.1.cssRem)
+                    .color(Colors.Gray)
+                    .maxWidth(35.cssRem)
+                    .margin(bottom = 3.cssRem)
+                    .display(DisplayStyle.Block)
+            )
+
+            // Placeholder for testimonials
+            SpanText(
+                "Testimonials coming soon...",
+                Modifier
+                    .fontSize(1.cssRem)
+                    .color(Colors.Gray)
+                    .fontStyle(FontStyle.Italic)
+            )
         }
     }
 }

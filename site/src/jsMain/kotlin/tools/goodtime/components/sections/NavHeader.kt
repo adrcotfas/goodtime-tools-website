@@ -10,18 +10,14 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
-import com.varabyte.kobweb.silk.components.icons.MoonIcon
-import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
 import com.varabyte.kobweb.silk.components.overlay.Overlay
 import com.varabyte.kobweb.silk.components.overlay.OverlayVars
-import com.varabyte.kobweb.silk.components.overlay.PopupPlacement
-import com.varabyte.kobweb.silk.components.overlay.Tooltip
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.animation.toAnimation
@@ -36,27 +32,55 @@ import tools.goodtime.components.widgets.IconButton
 import tools.goodtime.toSitePalette
 
 val NavHeaderStyle = CssStyle.base {
-    Modifier.fillMaxWidth().padding(1.cssRem)
+    Modifier
+        .fillMaxWidth()
+        .position(Position.Fixed)
+        .top(0.px)
+        .left(0.px)
+        .right(0.px)
+        .zIndex(1000)
+        .padding(1.cssRem)
+        .boxShadow(blurRadius = 0.2.cssRem, color = Colors.Black.copy(alpha = 50))
 }
 
 @Composable
-private fun NavLink(path: String, text: String) {
-    Link(path, text, variant = UndecoratedLinkVariant.then(UncoloredLinkVariant))
+private fun NavHeaderStyleWithBackground() = NavHeaderStyle.toModifier()
+    .backgroundColor(ColorMode.current.toSitePalette().nearBackground)
+
+@Composable
+private fun NavLink(path: String, text: String, onClick: (() -> Unit)? = null) {
+    val sitePalette = ColorMode.current.toSitePalette()
+
+    Link(
+        path,
+        text,
+        variant = UndecoratedLinkVariant.then(UncoloredLinkVariant),
+        modifier = Modifier
+            .padding(0.5.cssRem)
+            .fontSize(1.cssRem)
+            .fontWeight(600)
+            .color(sitePalette.brand.primary)
+
+            .then(if (onClick != null) Modifier.onClick { onClick() } else Modifier)
+    )
 }
 
 @Composable
-private fun MenuItems() {
-    NavLink("/", "Home")
-    NavLink("/about", "About")
+private fun DesktopMenuItems() {
+    NavLink("#download", "Download")
+    NavLink("#features", "Features")
+    NavLink("#testimonials", "Testimonials")
+    NavLink("/donate", "Donate")
 }
 
 @Composable
-private fun ColorModeButton() {
-    var colorMode by ColorMode.currentState
-    IconButton(onClick = { colorMode = colorMode.opposite },) {
-        if (colorMode.isLight) MoonIcon() else SunIcon()
+private fun MobileMenuItems(closeMenu: () -> Unit) {
+    Column(Modifier.gap(1.cssRem)) {
+        NavLink("#download", "Download") { closeMenu() }
+        NavLink("#features", "Features") { closeMenu() }
+        NavLink("#testimonials", "Testimonials") { closeMenu() }
+        NavLink("/donate", "Donate") { closeMenu() }
     }
-    Tooltip(ElementTarget.PreviousSibling, "Toggle color mode", placement = PopupPlacement.BottomRight)
 }
 
 @Composable
@@ -99,30 +123,50 @@ enum class SideMenuState {
 
 @Composable
 fun NavHeader() {
-    Row(NavHeaderStyle.toModifier(), verticalAlignment = Alignment.CenterVertically) {
-        Link("https://kobweb.varabyte.com") {
-            // Block display overrides inline display of the <img> tag, so it calculates centering better
-            Image("/kobweb-logo.png", "Kobweb Logo", Modifier.height(2.cssRem).display(DisplayStyle.Block))
-        }
+    Row(NavHeaderStyleWithBackground(), verticalAlignment = Alignment.CenterVertically) {
+        // Logo placeholder
+        SpanText(
+            "Goodtime Productivity",
+            Modifier
+                .fontSize(1.5.cssRem)
+                .fontWeight(700)
+                .color(ColorMode.current.toSitePalette().brand.primary)
+        )
 
         Spacer()
 
-        Row(Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD), verticalAlignment = Alignment.CenterVertically) {
-            MenuItems()
-            ColorModeButton()
-        }
-
+        // Desktop navigation
         Row(
             Modifier
-                .fontSize(1.5.cssRem)
-                .gap(1.cssRem)
+                .gap(2.cssRem)
+                .displayIfAtLeast(Breakpoint.MD),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            DesktopMenuItems()
+        }
+
+        // Mobile navigation
+        Row(
+            Modifier
                 .displayUntil(Breakpoint.MD),
             verticalAlignment = Alignment.CenterVertically
         ) {
             var menuState by remember { mutableStateOf(SideMenuState.CLOSED) }
 
-            ColorModeButton()
-            HamburgerButton(onClick =  { menuState = SideMenuState.OPEN })
+            // Toggle button that opens/closes menu and changes icon
+            IconButton(onClick = {
+                menuState = when (menuState) {
+                    SideMenuState.CLOSED -> SideMenuState.OPEN
+                    SideMenuState.OPEN -> SideMenuState.CLOSING
+                    SideMenuState.CLOSING -> SideMenuState.CLOSED
+                }
+            }) {
+                if (menuState == SideMenuState.CLOSED) {
+                    HamburgerIcon()
+                } else {
+                    CloseIcon()
+                }
+            }
 
             if (menuState != SideMenuState.CLOSED) {
                 SideMenu(
@@ -139,36 +183,48 @@ fun NavHeader() {
 private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd: () -> Unit) {
     Overlay(
         Modifier
-            .setVariable(OverlayVars.BackgroundColor, Colors.Transparent)
+            .setVariable(OverlayVars.BackgroundColor, Colors.Black.copy(alpha = 50))
             .onClick { close() }
     ) {
         key(menuState) { // Force recompute animation parameters when close button is clicked
             Column(
                 Modifier
                     .fillMaxHeight()
-                    .width(clamp(8.cssRem, 33.percent, 10.cssRem))
+                    .width(clamp(12.cssRem, 40.percent, 16.cssRem))
                     .align(Alignment.CenterEnd)
-                    // Close button will appear roughly over the hamburger button, so the user can close
-                    // things without moving their finger / cursor much.
                     .padding(top = 1.cssRem, leftRight = 1.cssRem)
-                    .gap(1.5.cssRem)
+                    .gap(2.cssRem)
                     .backgroundColor(ColorMode.current.toSitePalette().nearBackground)
                     .animation(
                         SideMenuSlideInAnim.toAnimation(
-                            duration = 200.ms,
+                            duration = 300.ms,
                             timingFunction = if (menuState == SideMenuState.OPEN) AnimationTimingFunction.EaseOut else AnimationTimingFunction.EaseIn,
                             direction = if (menuState == SideMenuState.OPEN) AnimationDirection.Normal else AnimationDirection.Reverse,
                             fillMode = AnimationFillMode.Forwards
                         )
                     )
-                    .borderRadius(topLeft = 2.cssRem)
+                    .borderRadius(topLeft = 1.cssRem, bottomLeft = 1.cssRem)
+                    .boxShadow(blurRadius = 0.5.cssRem, color = Colors.Black.copy(alpha = 30))
                     .onClick { it.stopPropagation() }
                     .onAnimationEnd { onAnimationEnd() },
-                horizontalAlignment = Alignment.End
+                horizontalAlignment = Alignment.Start
             ) {
-                CloseButton(onClick = { close() })
-                Column(Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem), horizontalAlignment = Alignment.End) {
-                    MenuItems()
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.End
+                ) {
+                    CloseButton(onClick = { close() })
+                }
+
+                Column(
+                    Modifier
+                        .padding(left = 1.5.cssRem)
+                        .gap(1.5.cssRem)
+                        .fontSize(1.2.cssRem),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    MobileMenuItems(close)
                 }
             }
         }

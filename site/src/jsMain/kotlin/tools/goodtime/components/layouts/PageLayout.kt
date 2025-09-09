@@ -28,7 +28,7 @@ import tools.goodtime.components.sections.NavHeader
 import tools.goodtime.toSitePalette
 
 val PageContentStyle = CssStyle {
-    base { Modifier.fillMaxSize().padding(leftRight = 2.cssRem, top = 4.cssRem) }
+    base { Modifier.fillMaxSize().padding(leftRight = 2.cssRem, top = 6.cssRem) }
     Breakpoint.MD { Modifier.maxWidth(60.cssRem) }
 }
 
