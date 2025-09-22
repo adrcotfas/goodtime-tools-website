@@ -18,7 +18,7 @@ class SitePalette(
     val brand: Brand,
 ) {
     class Brand(
-        val primary: Color = Color.rgb(0x3C83EF),
+        val primary: Color = Color.rgb(0x289A79),
         val accent: Color = Color.rgb(0xF3DB5B),
     )
 }
