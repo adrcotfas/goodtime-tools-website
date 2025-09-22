@@ -178,7 +178,7 @@ private fun HeroSection() {
                         "★★★★★",
                         Modifier
                             .fontSize(1.25.cssRem)
-                            .color(Colors.Orange)
+                            .color(Colors.Gold)
                     )
                     SpanText(
                         "4.6/5 (20k+ reviews)",
