@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.App
 import com.varabyte.kobweb.silk.SilkApp
 import com.varabyte.kobweb.silk.components.layout.Surface
@@ -29,7 +30,11 @@ fun initColorMode(ctx: InitSilkContext) {
 @InitSilk
 fun initStyles(ctx: InitSilkContext) {
     ctx.stylesheet.apply {
-        registerStyleBase("html, body") { Modifier.fillMaxHeight() }
+        registerStyleBase("html, body") {
+            Modifier.fillMaxHeight().styleModifier {
+                property("overscroll-behavior", "none")
+            }
+        }
         registerStyleBase("body") { Modifier.scrollBehavior(ScrollBehavior.Smooth) }
     }
 }
