@@ -59,7 +59,7 @@ private fun NavLink(path: String, text: String, onClick: (() -> Unit)? = null) {
 private fun DesktopMenuItems() {
     NavLink("#download", "Download")
     NavLink("#features", "Features")
-    NavLink("#testimonials", "Testimonials")
+    NavLink("#reviews", "Testimonials")
 }
 
 

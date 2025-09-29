@@ -7,6 +7,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.core.data.getValue
@@ -41,6 +42,7 @@ fun PageLayout(ctx: PageContext, content: @Composable ColumnScope.() -> Unit) {
         Modifier
             .fillMaxWidth()
             .minHeight(100.vh)
+            .backgroundColor(Colors.Black)
             // Create a box with two rows: the main content (fills as much space as it can) and the footer (which reserves
             // space at the bottom). "min-content" means the use the height of the row, which we use for the footer.
             // Since this box is set to *at least* 100%, the footer will always appear at least on the bottom but can be
