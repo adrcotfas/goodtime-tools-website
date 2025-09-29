@@ -38,7 +38,7 @@ val NavHeaderStyle = NavHeaderBackgroundStyle.extendedByBase {
         .fillMaxWidth()
         .position(Position.Sticky)
         .top(0.percent)
-        .height(128.px)
+        .height(96.px)
 }
 
 @Composable

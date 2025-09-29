@@ -14,8 +14,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.Anchor
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
-import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
@@ -31,68 +29,90 @@ import tools.goodtime.nonRightClickable
 
 @Composable
 fun HeroSection() {
-    SimpleGrid(
-        numColumns(1, md = 2),
-        modifier = Modifier.fillMaxWidth().id("download"),
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .displayUntil(Breakpoint.MD),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            TitleSection()
+
+        }
+        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            VideoSection()
+        }
+    }
+
+    Row(
+        modifier = Modifier
+            .id("download")
+            .fillMaxWidth()
+            .displayIfAtLeast(Breakpoint.MD),
+        horizontalArrangement = Arrangement.spacedBy(10.cssRem, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TitleSection()
+        VideoSection()
+    }
+}
+
+@Composable
+fun TitleSection() {
+    Column(
+        modifier = Modifier.padding(1.cssRem),
+        verticalArrangement = Arrangement.spacedBy(1.5.cssRem, Alignment.CenterVertically),
+    ) {
+
+        Row(
+            modifier = Modifier.displayUntil(Breakpoint.MD).fillMaxWidth().padding(top = 3.cssRem),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            HomeLogo()
+        }
+
         Column(
-            modifier = Modifier.padding(1.cssRem).fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(1.5.cssRem, Alignment.CenterVertically),
+            modifier = Modifier.displayIfAtLeast(Breakpoint.MD).fillMaxWidth(),
             horizontalAlignment = Alignment.Start
         ) {
-
-            Row(
-                modifier = Modifier.displayUntil(Breakpoint.MD).fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                HomeLogo()
-            }
-
-            Column(
-                modifier = Modifier.displayIfAtLeast(Breakpoint.MD).fillMaxWidth(),
-                horizontalAlignment = Alignment.Start
-            ) {
-                HeroSectionContent()
-            }
-
-            Column(
-                modifier = Modifier.displayUntil(Breakpoint.MD).fillMaxWidth()
-                    .padding(top = 2.cssRem, bottom = 1.cssRem),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                HeroSectionContent()
-            }
+            HeroSectionContent()
         }
 
         Column(
-            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.displayUntil(Breakpoint.MD).fillMaxWidth()
+                .padding(top = 2.cssRem, bottom = 1.cssRem),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(
-                Modifier.padding(top = 2.cssRem),
-                contentAlignment = Alignment.Center
-            ) {
-                Video(attrs = {
-                    width(260)
-                    attr("autoplay", "")
-                    attr("playsinline", "")
-                    attr("preload", "auto")
-                    attr("loop", "")
-                    attr("muted", "")
-                    nonRightClickable()
-                }) {
-                    Source(attrs = {
-                        attr("src", "videos/demo.mp4")
-                        attr("type", "video/mp4")
-                    })
-                }
-                Image(
-                    src = "/phone.png",
-                    modifier = Modifier
-                        .width(340.px)
-                )
-            }
+            HeroSectionContent()
         }
+    }
+}
+
+@Composable
+fun VideoSection() {
+    Box(
+        Modifier.padding(top = 2.cssRem),
+        contentAlignment = Alignment.Center
+    ) {
+        Video(attrs = {
+            width(260)
+            attr("autoplay", "")
+            attr("playsinline", "")
+            attr("preload", "auto")
+            attr("loop", "")
+            attr("muted", "")
+            nonRightClickable()
+        }) {
+            Source(attrs = {
+                attr("src", "videos/demo.mp4")
+                attr("type", "video/mp4")
+            })
+        }
+        Image(
+            src = "/phone.png",
+            modifier = Modifier
+                .width(340.px)
+        )
     }
 }
 
@@ -151,7 +171,7 @@ fun HeroSectionContent() {
                     .color(Colors.PaleGoldenRod)
             )
             SpanText(
-                "4.6/5 (20k+ reviews)",
+                "4.6/5 (20,000+ reviews)",
                 Modifier
                     .fontSize(1.cssRem)
                     .color(Colors.Gray)
