@@ -14,6 +14,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.data.add
@@ -28,6 +29,8 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
+import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.attributes.AttrsScope
@@ -40,6 +43,7 @@ import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Video
 import org.w3c.dom.Element
 import tools.goodtime.components.layouts.PageLayoutData
+import tools.goodtime.components.sections.HomeLogo
 import tools.goodtime.nonRightClickable
 import tools.goodtime.toSitePalette
 
@@ -105,65 +109,31 @@ private fun HeroSection() {
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(
-            modifier = Modifier.padding(1.cssRem),
+            modifier = Modifier.padding(1.cssRem).fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(1.5.cssRem, Alignment.CenterVertically),
             horizontalAlignment = Alignment.Start
         ) {
-            Span(
-                attrs = Modifier
-                    .fontFamily("RobotoFlex")
-                    .fontSize(3.cssRem)
-                    .lineHeight(1.15)
-                    .fontWeight(700)
-                    .display(DisplayStyle.Block).toAttrs()
-            )
-            {
-                Text("Your Simple Path to Deep Concentration")
-            }
 
-
-
-            Span(
-                attrs = Modifier
-                    .fontSize(1.15.cssRem)
-                    .margin(bottom = 0.5.cssRem)
-                    .display(DisplayStyle.Block).toAttrs()
+            Row(
+                modifier = Modifier.displayUntil(Breakpoint.MD).fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text("A minimalist time management app used by learners, creators, and leaders.")
-                Br()
-                Text("Improve your focus, stop procrastinating, and unlock your potential.")
+                HomeLogo()
             }
 
             Column(
-                modifier = Modifier.margin(top = 1.cssRem),
-                verticalArrangement = Arrangement.spacedBy(1.5.cssRem),
+                modifier = Modifier.displayIfAtLeast(Breakpoint.MD).fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
+            ) {
+                HeroSectionContent()
+            }
+
+            Column(
+                modifier = Modifier.displayUntil(Breakpoint.MD).fillMaxWidth()
+                    .padding(top = 2.cssRem, bottom = 1.cssRem),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Anchor(href = "https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime") {
-                    Image(
-                        "/google_play_badge.png",
-                        "Get it on Google Play",
-                        Modifier.display(DisplayStyle.Block)
-                    )
-                }
-                Row(
-                    modifier = Modifier.padding(0.1.cssRem),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(0.5.cssRem, alignment = Alignment.CenterHorizontally)
-                ) {
-                    SpanText(
-                        "★★★★★",
-                        Modifier
-                            .fontSize(1.25.cssRem)
-                            .color(Colors.Gold)
-                    )
-                    SpanText(
-                        "4.6/5 (20k+ reviews)",
-                        Modifier
-                            .fontSize(1.cssRem)
-                            .color(Colors.Gray)
-                    )
-                }
+                HeroSectionContent()
             }
         }
 
@@ -173,7 +143,7 @@ private fun HeroSection() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
-                Modifier,//.padding(top = 2.cssRem),
+                Modifier.padding(top = 2.cssRem),
                 contentAlignment = Alignment.Center
             ) {
                 Video(attrs = {
@@ -191,6 +161,70 @@ private fun HeroSection() {
                     })
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun HeroSectionContent() {
+    val title = "Unlock Deep Concentration"
+    val titleModifier = Modifier
+        .fontFamily("RobotoFlex")
+        .fontSize(2.5.cssRem)
+        .lineHeight(1.15)
+        .fontWeight(700)
+        .display(DisplayStyle.Block)
+
+    Span(attrs = titleModifier.displayUntil(Breakpoint.MD).textAlign(TextAlign.Center).toAttrs()) {
+        Text(title)
+    }
+
+    Span(attrs = titleModifier.displayIfAtLeast(Breakpoint.MD).textAlign(TextAlign.Start).toAttrs()) {
+        Text(title)
+    }
+
+    val subtitle = "Join other learners, creators, and leaders who are getting things done"
+    val subtitleModifier = Modifier
+        .width(350.px)
+        .fontSize(1.15.cssRem)
+        .margin(bottom = 0.5.cssRem)
+        .display(DisplayStyle.Block)
+
+    Span(attrs = subtitleModifier.displayUntil(Breakpoint.MD).textAlign(TextAlign.Center).toAttrs()) {
+        Text(subtitle)
+    }
+    Span(attrs = subtitleModifier.displayIfAtLeast(Breakpoint.MD).textAlign(TextAlign.Start).toAttrs()) {
+        Text(subtitle)
+    }
+
+    Column(
+        modifier = Modifier.margin(top = 2.cssRem),
+        verticalArrangement = Arrangement.spacedBy(1.5.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Anchor(href = "https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime") {
+            Image(
+                "/google_play_badge.png",
+                "Get it on Google Play",
+                Modifier.display(DisplayStyle.Block)
+            )
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(0.5.cssRem, alignment = Alignment.CenterHorizontally)
+        ) {
+            SpanText(
+                "★★★★★",
+                Modifier
+                    .fontSize(1.25.cssRem)
+                    .color(Colors.PaleGoldenRod)
+            )
+            SpanText(
+                "4.6/5 (20k+ reviews)",
+                Modifier
+                    .fontSize(1.cssRem)
+                    .color(Colors.Gray)
+            )
         }
     }
 }
