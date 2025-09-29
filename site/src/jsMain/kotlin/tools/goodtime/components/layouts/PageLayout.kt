@@ -62,6 +62,7 @@ fun PageLayout(ctx: PageContext, content: @Composable ColumnScope.() -> Unit) {
             Modifier.fillMaxSize().gridRow(1),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            NavHeader()
             Div(PageContentStyle.toAttrs()) {
                 content()
             }

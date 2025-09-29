@@ -1,19 +1,14 @@
 package tools.goodtime.pages
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontStyle
-import com.varabyte.kobweb.compose.css.ShapeMargin
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.functions.RadialGradient
-import com.varabyte.kobweb.compose.css.height
 import com.varabyte.kobweb.compose.css.width
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
@@ -35,6 +30,7 @@ import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Br
 import org.jetbrains.compose.web.dom.Div
@@ -42,7 +38,9 @@ import org.jetbrains.compose.web.dom.Source
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Video
+import org.w3c.dom.Element
 import tools.goodtime.components.layouts.PageLayoutData
+import tools.goodtime.nonRightClickable
 import tools.goodtime.toSitePalette
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
@@ -101,7 +99,6 @@ fun HomePage() {
 
 @Composable
 private fun HeroSection() {
-    val sitePalette = ColorMode.current.toSitePalette()
 
     SimpleGrid(
         numColumns(1, md = 2),
@@ -112,26 +109,6 @@ private fun HeroSection() {
             verticalArrangement = Arrangement.spacedBy(1.5.cssRem, Alignment.CenterVertically),
             horizontalAlignment = Alignment.Start
         ) {
-
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(bottom = 2.cssRem),
-                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
-            ) {
-                Image(src = "goodtime_logo.png", modifier = Modifier.size(4.cssRem))
-                SpanText(
-                    text = "Goodtime", modifier = Modifier
-                        .fontSize(1.5.cssRem)
-                        .fontWeight(500)
-                        .display(DisplayStyle.Block)
-                )
-                SpanText(
-                    text = " Productivity", modifier = Modifier
-                        .fontSize(1.5.cssRem)
-                        .fontWeight(200)
-                        .display(DisplayStyle.Block)
-                )
-            }
-
             Span(
                 attrs = Modifier
                     .fontFamily("RobotoFlex")
@@ -162,7 +139,7 @@ private fun HeroSection() {
                 verticalArrangement = Arrangement.spacedBy(1.5.cssRem),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Anchor("https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime") {
+                Anchor(href = "https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime") {
                     Image(
                         "/google_play_badge.png",
                         "Get it on Google Play",
@@ -202,8 +179,11 @@ private fun HeroSection() {
                 Video(attrs = {
                     width(320)
                     attr("autoplay", "")
+                    attr("playsinline", "")
+                    attr("preload", "auto")
                     attr("loop", "")
                     attr("muted", "")
+                    nonRightClickable()
                 }) {
                     Source(attrs = {
                         attr("src", "videos/demo.mp4")
@@ -309,3 +289,5 @@ private fun ReviewsSection() {
         }
     }
 }
+
+
