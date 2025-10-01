@@ -16,6 +16,8 @@ import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.Anchor
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.layout.SimpleGrid
+import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
@@ -23,6 +25,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.DisplayStyle
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Source
@@ -175,19 +178,29 @@ fun HeroSectionContent() {
         Text(subtitle2)
     }
 
-    Column(
-        modifier = Modifier.margin(top = 2.cssRem),
-        verticalArrangement = Arrangement.spacedBy(1.cssRem),
-        horizontalAlignment = Alignment.CenterHorizontally
+    SimpleGrid(
+        numColumns(1, md = 2),
+        Modifier.margin(topBottom = 2.cssRem).rowGap(1.cssRem).columnGap(1.cssRem),
     ) {
-        LinkButton(
-            GOOGLE_PLAY_STORE_URL,
-            HeroButton.toModifier(),
-            "Android",
-            primary = true,
-            shape = ButtonShape.CIRCLE
-        )
-        RatingBrag(Modifier.padding(left = 1.cssRem, right = 1.cssRem))
+        Column(
+            verticalArrangement = Arrangement.spacedBy(1.cssRem),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            LinkButton(
+                GOOGLE_PLAY_STORE_URL,
+                HeroButton.toModifier(),
+                "Android",
+                primary = true,
+                shape = ButtonShape.CIRCLE
+            )
+            RatingBrag(Modifier.padding(left = 1.cssRem, right = 1.cssRem))
+        }
+        Box(
+            modifier = Modifier.height(3.5.cssRem).minWidth(160.px).padding(8.px).borderRadius(32.px)
+                .border(width = 1.px, color = Colors.DimGray, style = LineStyle.Solid), contentAlignment = Alignment.Center
+        ) {
+            SpanText(text = "soon on iOS", modifier = Modifier)
+        }
     }
 }
 

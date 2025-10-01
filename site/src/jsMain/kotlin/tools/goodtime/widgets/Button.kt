@@ -6,24 +6,19 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.graphics.lightened
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
-import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
-import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
-import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.theme.colors.palette.background
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.colors.shifted
 import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 enum class ButtonShape {
@@ -46,7 +41,7 @@ val PrimaryButtonVariant = ButtonStyle.addVariant {
     }
 
     hover {
-        Modifier.backgroundColor(backgroundColor.lightened())
+        Modifier.backgroundColor(backgroundColor.darkened())
     }
 }
 
@@ -88,7 +83,7 @@ fun ThemedButton(
         Row(verticalAlignment = Alignment.CenterVertically) {
             content()
             if (!text.isNullOrEmpty()) {
-                SpanText(text = text, modifier = Modifier.fontWeight(700))
+                SpanText(text = text, modifier = Modifier.fontWeight(800))
             }
         }
     }

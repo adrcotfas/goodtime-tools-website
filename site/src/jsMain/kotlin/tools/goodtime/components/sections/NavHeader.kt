@@ -67,7 +67,7 @@ fun Modifier.navHeaderZIndex() = this.zIndex(10)
 val HeroButton = CssStyle {
     base {
         // Extra height helps these hero buttons feel a bit more substantial
-        Modifier.width(300.px).setVariable(ButtonVars.Height, 3.cssRem)
+        Modifier.width(300.px).setVariable(ButtonVars.Height, 3.5.cssRem)
     }
 
     Breakpoint.MD {
