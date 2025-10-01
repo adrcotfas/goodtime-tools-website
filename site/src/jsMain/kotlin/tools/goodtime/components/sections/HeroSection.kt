@@ -136,7 +136,7 @@ fun VideoSection() {
 
 @Composable
 fun HeroSectionContent() {
-    val title = "Unlock Deep Concentration"
+    val title = "Enter Deep Concentration"
     val titleModifier = Modifier
         .gradientText()
         .fontFamily("RobotoFlex")
@@ -203,7 +203,7 @@ fun RatingBrag(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.spacedBy(4.px, alignment = Alignment.CenterHorizontally)
         ) {
             SpanText(
-                "4.6",
+                "4.7",
                 Modifier
                     .gradientText()
                     .fontSize(1.25.cssRem)
