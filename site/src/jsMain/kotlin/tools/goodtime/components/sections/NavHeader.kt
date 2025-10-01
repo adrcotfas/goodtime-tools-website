@@ -12,9 +12,11 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
+import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
@@ -22,6 +24,10 @@ import com.varabyte.kobweb.silk.style.extendedByBase
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Button
+import tools.goodtime.GOOGLE_PLAY_STORE_URL
+import tools.goodtime.widgets.ButtonShape
+import tools.goodtime.widgets.LinkButton
 
 val DividerColor by StyleVariable<CSSColorValue>()
 fun Modifier.dividerBoxShadow() = this.boxShadow(spreadRadius = 1.px, color = DividerColor.value())
@@ -42,7 +48,7 @@ val NavHeaderStyle = NavHeaderBackgroundStyle.extendedByBase {
 }
 
 @Composable
-private fun NavLink(path: String, text: String, onClick: (() -> Unit)? = null) {
+private fun NavLink(path: String, text: String) {
     Link(
         path,
         text,
@@ -51,24 +57,31 @@ private fun NavLink(path: String, text: String, onClick: (() -> Unit)? = null) {
             .padding(0.5.cssRem)
             .fontSize(1.cssRem)
             .fontWeight(500)
-            .then(if (onClick != null) Modifier.onClick { onClick() } else Modifier)
     )
-}
-
-@Composable
-private fun DesktopMenuItems() {
-    NavLink("#download", "Download")
-    NavLink("#features", "Features")
-    NavLink("#reviews", "Testimonials")
 }
 
 
 // The nav header needs a higher z-index to be shown above elements with `position: sticky`
 fun Modifier.navHeaderZIndex() = this.zIndex(10)
 
+val HeroButton = CssStyle {
+    base {
+        // Extra height helps these hero buttons feel a bit more substantial
+        Modifier.width(300.px).setVariable(ButtonVars.Height, 3.cssRem)
+    }
+
+    Breakpoint.MD {
+        Modifier.width(150.px)
+    }
+}
+
+
 @Composable
 fun NavHeader() {
-    Box(NavHeaderStyle.toModifier().displayIfAtLeast(Breakpoint.MD).navHeaderZIndex(), contentAlignment = Alignment.Center) {
+    Box(
+        NavHeaderStyle.toModifier().displayIfAtLeast(Breakpoint.MD).navHeaderZIndex(),
+        contentAlignment = Alignment.Center
+    ) {
         Row(
             Modifier.fillMaxWidth(90.percent),
             verticalAlignment = Alignment.CenterVertically
@@ -81,7 +94,10 @@ fun NavHeader() {
                     .displayIfAtLeast(Breakpoint.MD),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                DesktopMenuItems()
+                LinkButton(GOOGLE_PLAY_STORE_URL, HeroButton.toModifier(), "Download", primary = true, shape = ButtonShape.CIRCLE) {
+                }
+                NavLink("#features", "Features")
+                NavLink("#reviews", "Testimonials")
             }
         }
     }
