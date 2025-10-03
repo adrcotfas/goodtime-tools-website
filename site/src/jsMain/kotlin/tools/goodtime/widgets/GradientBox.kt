@@ -20,7 +20,7 @@ val GradientBoxStyle = CssStyle.base<GradientBoxKind> {
     Modifier
         .backgroundImage(
             radialGradient(RadialGradient.Shape.Circle, CSSPosition(25.percent)) {
-                add(Color.rgba(80, 191, 172, 0.5f))
+                add(Color.rgba(80, 191, 172, 0.3f))
                 add(Colors.Transparent, 25.percent)
             }
         )
@@ -31,7 +31,7 @@ val GradientBoxVariant70 = GradientBoxStyle.addVariant {
         Modifier
             .backgroundImage(
                 radialGradient(RadialGradient.Shape.Circle, CSSPosition(50.percent)) {
-                    add(Color.rgba(80, 191, 172, 0.5f))
+                    add(Color.rgba(80, 191, 172, 0.3f))
                     add(Colors.Transparent, 60.percent)
                 }
             )

@@ -24,9 +24,7 @@ import com.varabyte.kobweb.silk.style.extendedByBase
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
-import org.jetbrains.compose.web.dom.Button
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
-import tools.goodtime.widgets.ButtonShape
 import tools.goodtime.widgets.LinkButton
 
 val DividerColor by StyleVariable<CSSColorValue>()
@@ -75,7 +73,6 @@ val HeroButton = CssStyle {
     }
 }
 
-
 @Composable
 fun NavHeader() {
     Box(
@@ -94,7 +91,7 @@ fun NavHeader() {
                     .displayIfAtLeast(Breakpoint.MD),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                LinkButton(GOOGLE_PLAY_STORE_URL, HeroButton.toModifier(), "Download", primary = true, shape = ButtonShape.CIRCLE) {
+                LinkButton(GOOGLE_PLAY_STORE_URL, HeroButton.toModifier(), "Download") {
                 }
                 NavLink("#features", "Features")
                 NavLink("#reviews", "Testimonials")

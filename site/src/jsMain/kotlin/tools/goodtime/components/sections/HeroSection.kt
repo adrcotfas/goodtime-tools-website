@@ -2,7 +2,6 @@ package tools.goodtime.components.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.css.width
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -12,9 +11,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.navigation.Anchor
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
@@ -23,11 +20,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.DisplayStyle
-import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Source
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
@@ -157,8 +150,7 @@ fun HeroSectionContent() {
         Text(title)
     }
 
-    val subtitle = "Timebox for structure or count-up for flow."
-    val subtitle2 = "Join other learners, creators, and leaders who are getting things done."
+    val subtitle = "Join other learners, creators, and leaders who are getting things done."
     val subtitleModifier = Modifier
         //.maxWidth(350.px)
         .fontSize(1.15.cssRem)
@@ -170,12 +162,6 @@ fun HeroSectionContent() {
     }
     Span(attrs = subtitleModifier.displayIfAtLeast(Breakpoint.MD).textAlign(TextAlign.Start).toAttrs()) {
         Text(subtitle)
-    }
-    Span(attrs = subtitleModifier.displayUntil(Breakpoint.MD).textAlign(TextAlign.Center).toAttrs()) {
-        Text(subtitle2)
-    }
-    Span(attrs = subtitleModifier.displayIfAtLeast(Breakpoint.MD).textAlign(TextAlign.Start).toAttrs()) {
-        Text(subtitle2)
     }
 
     SimpleGrid(
@@ -191,7 +177,7 @@ fun HeroSectionContent() {
                 HeroButton.toModifier(),
                 "Android",
                 primary = true,
-                shape = ButtonShape.CIRCLE
+                shape = ButtonShape.ROUNDED_RECTANGLE
             )
             RatingBrag(Modifier.padding(left = 1.cssRem, right = 1.cssRem))
         }

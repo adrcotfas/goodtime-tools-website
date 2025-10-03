@@ -1,79 +1,69 @@
 package tools.goodtime.components.sections
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.FontStyle
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.alignItems
-import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.display
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.flexDirection
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.fontStyle
-import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
-import com.varabyte.kobweb.compose.ui.modifiers.id
-import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
-import com.varabyte.kobweb.compose.ui.modifiers.margin
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.minHeight
-import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.textAlign
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.jetbrains.compose.web.css.AlignItems
+import com.varabyte.kobweb.silk.components.layout.SimpleGrid
+import com.varabyte.kobweb.silk.components.layout.numColumns
 import org.jetbrains.compose.web.css.DisplayStyle
-import org.jetbrains.compose.web.css.FlexDirection
-import org.jetbrains.compose.web.css.JustifyContent
 import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.vh
-import org.jetbrains.compose.web.dom.Div
-import tools.goodtime.toSitePalette
+import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.Text
+import tools.goodtime.gradientText
+import tools.goodtime.widgets.FeatureCard
 
 @Composable
 fun ReviewsSection() {
-    Div(
-        Modifier
-            .id("reviews")
-            .fillMaxWidth()
-            .minHeight(60.vh)
-            .display(DisplayStyle.Flex)
-            .flexDirection(FlexDirection.Column)
-            .justifyContent(JustifyContent.Center)
-            .alignItems(AlignItems.Center)
-            .padding(2.cssRem)
-            .toAttrs()
-    ) {
-        Div(Modifier.textAlign(TextAlign.Center).toAttrs()) {
-            SpanText(
-                "What Our Users Say",
-                Modifier
-                    .fontSize(2.5.cssRem)
-                    .fontWeight(700)
-                    .color(ColorMode.current.toSitePalette().brand.primary)
-                    .margin(bottom = 1.cssRem)
-                    .display(DisplayStyle.Block)
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        val title = "What are users saying"
+        val titleModifier = Modifier
+            .gradientText()
+            .fontFamily("RobotoFlex")
+            .fontSize(2.25.cssRem)
+            .lineHeight(1.15)
+            .margin(bottom = 1.cssRem)
+            .fontWeight(700)
+            .display(DisplayStyle.Block)
+
+        Span(attrs = titleModifier.textAlign(TextAlign.Center).toAttrs()) {
+            Text(title)
+        }
+
+        SimpleGrid(
+            numColumns(1, md = 4),
+            modifier = Modifier
+                .id("features")
+                .fillMaxWidth()
+                .padding(2.cssRem)
+                .gap(2.cssRem),
+        ) {
+            FeatureCard(
+                title = "",
+                description = listOf("I am now master of time")
+            )
+            FeatureCard(
+                title = "Timer Profiles",
+                description = listOf("Strict countdown timers for techniques like Pomodoro for structured work sessions, or open-ended count-ups for deep, uninterrupted flow.")
             )
 
-            SpanText(
-                "See how our tools have helped users improve their productivity and workflow.",
-                Modifier
-                    .fontSize(1.1.cssRem)
-                    .color(Colors.Gray)
-                    .maxWidth(35.cssRem)
-                    .margin(bottom = 3.cssRem)
-                    .display(DisplayStyle.Block)
+            FeatureCard(
+                title = "Colored Labels",
+                description = listOf(
+                    "Organize tasks with colored labels, each with custom timer settings.",
+                    "Archive when done."
+                )
             )
 
-            // Placeholder for reviews
-            SpanText(
-                "Reviews coming soon...",
-                Modifier
-                    .fontSize(1.cssRem)
-                    .color(Colors.Gray)
-                    .fontStyle(FontStyle.Italic)
+            FeatureCard(
+                title = "Track Progress",
+                description = listOf(
+                    "Detailed stats show your productivity patterns.",
+                    "Organize by labels, add notes, and manually log sessions you completed offline."
+                )
             )
         }
     }
