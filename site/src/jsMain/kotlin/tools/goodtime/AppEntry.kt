@@ -36,18 +36,6 @@ fun initStyles(ctx: InitSilkContext) {
                 property("user-select", "none")
             }
         }
-        registerStyleBase("body") { Modifier.scrollBehavior(ScrollBehavior.Smooth) }
-        registerStyleBase("a") {
-            Modifier.styleModifier {
-                property("color", "#50BFACFF")
-            }
-        }
-
-        registerStyleBase("a:visited") {
-            Modifier.styleModifier {
-                property("color", "#50BFACFF")
-            }
-        }
     }
 }
 

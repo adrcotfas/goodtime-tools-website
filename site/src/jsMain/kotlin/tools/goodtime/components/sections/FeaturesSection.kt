@@ -1,12 +1,14 @@
 package tools.goodtime.components.sections
 
 import androidx.compose.runtime.*
+import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
@@ -14,6 +16,7 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.selectors.descendants
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.cssRem
@@ -36,10 +39,26 @@ val FeaturesButton = CssStyle {
     }
 }
 
+val FeaturesLinkStyle = CssStyle {
+    descendants("a") {
+        Modifier.styleModifier {
+            property("color", "#50BFACFF")
+        }
+    }
+    descendants("a:visited") {
+        Modifier.styleModifier {
+            property("color", "#50BFACFF")
+        }
+    }
+}
+
 @Composable
 fun FeaturesSection() {
     var showMore by remember { mutableStateOf(false) }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = FeaturesLinkStyle.toModifier()
+    ) {
         val title = "Minimalist but powerful"
         val titleModifier = Modifier
             .gradientText()
