@@ -57,7 +57,7 @@ fun FeaturesSection() {
     var showMore by remember { mutableStateOf(false) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = FeaturesLinkStyle.toModifier()
+        modifier = FeaturesLinkStyle.toModifier().id("features")
     ) {
         val title = "Minimalist but powerful"
         val titleModifier = Modifier
@@ -76,7 +76,6 @@ fun FeaturesSection() {
         SimpleGrid(
             numColumns(1, md = 3),
             modifier = Modifier
-                .id("features")
                 .fillMaxWidth()
                 .padding(2.cssRem)
                 .gap(2.cssRem),

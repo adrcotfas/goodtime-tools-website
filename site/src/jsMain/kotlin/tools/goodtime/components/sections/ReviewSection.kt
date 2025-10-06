@@ -74,7 +74,7 @@ data class ReviewCardData(val name: String, val review: String, val link: String
 @Composable
 fun ReviewsSection() {
     var expandLevel by remember { mutableStateOf(0) }
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = Modifier.id("reviews"), horizontalAlignment = Alignment.CenterHorizontally) {
         val title = "What are users saying"
         val titleModifier = Modifier
             .gradientText()
