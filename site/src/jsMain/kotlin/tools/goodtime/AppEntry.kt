@@ -20,6 +20,7 @@ import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import kotlinx.browser.document
+import org.w3c.dom.HTMLLinkElement
 import org.w3c.dom.HTMLScriptElement
 
 private const val COLOR_MODE_KEY = "goodtime:colorMode"
@@ -51,11 +52,19 @@ fun AppEntry(content: @Composable () -> Unit) {
         }
 
         LaunchedEffect(Unit) {
+            // Add GitHub buttons script
             val script = document.createElement("script") as HTMLScriptElement
             script.src = "https://buttons.github.io/buttons.js"
             script.async = true
             script.defer = true
             document.head?.appendChild(script)
+
+            // Add favicon
+            val favicon = document.createElement("link") as HTMLLinkElement
+            favicon.rel = "icon"
+            favicon.type = "image/png"
+            favicon.href = "/favicon.png"
+            document.head?.appendChild(favicon)
         }
 
         Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
