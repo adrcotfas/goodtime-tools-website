@@ -7,9 +7,11 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.components.text.SpanText
@@ -17,17 +19,18 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
-import com.varabyte.kobweb.silk.style.vars.color.ColorVar
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Span
-import tools.goodtime.toSitePalette
+import org.jetbrains.compose.web.dom.Text
+import tools.goodtime.GOOGLE_PLAY_STORE_URL
 
 val FooterStyle = CssStyle {
     base {
         Modifier
-            .backgroundColor(colorMode.toSitePalette().nearBackground)
+            .backgroundColor(Colors.Black)
             .padding(top = 3.cssRem, bottom = 2.cssRem, leftRight = 10.percent)
     }
     Breakpoint.MD {
@@ -43,33 +46,74 @@ val FooterLinkStyle = CssStyle.base {
 
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
-    val sitePalette = ColorMode.current.toSitePalette()
-
     Column(
         FooterStyle.toModifier().then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Top line with links
+        Link(
+            GOOGLE_PLAY_STORE_URL,
+            openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+        ) {
+            Image(
+                src = "/google_play_badge.png",
+                description = "Get it on Google Play",
+                modifier = Modifier.height(60.px).margin(bottom = 2.cssRem)
+            )
+        }
+
         Row(
             Modifier
                 .fillMaxWidth()
-                .margin(bottom = 1.cssRem),
-            horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.SpaceEvenly
+                .margin(bottom = 2.cssRem)
+                .gap(1.cssRem),
+            horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            FooterLink("/terms", "Terms and Privacy")
-            FooterLink("https://github.com/adrcotfas/goodtime-tools-website/discussions", "Discussions", openNewTab = true)
-            FooterLink("mailto:contact@goodtime.tools", "Contact")
+            Row(modifier = Modifier
+                .margin(bottom = 7.px)
+                .gap(1.cssRem),
+                horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center) {
+                Link(
+                    "mailto:contact@goodtime.tools",
+                    modifier = Modifier.color(Colors.White).textDecorationLine(TextDecorationLine.None),
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+                ) {
+                    SpanText("Contact")
+                }
+
+                Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
+
+                Link(
+                    "https://www.linkedin.com/company/goodtime-app/",
+                    modifier = Modifier.color(Colors.White).textDecorationLine(TextDecorationLine.None),
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+                ) {
+                    SpanText("LinkedIn")
+                }
+
+                Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
+            }
+
+            A(
+                attrs = Modifier.classNames("github-button").toAttrs {
+                    attr("href", "https://github.com/adrcotfas/goodtime")
+                    attr("data-color-scheme", "no-preference: light; light: light; dark: dark;")
+                    attr("data-size", "large")
+                    attr("data-show-count", "true")
+                    attr("aria-label", "Star adrcotfas/goodtime on GitHub")
+                }
+            ) { Text("Star") }
         }
 
-        // Bottom attribution row
+        // Copyright
         Span(
             Modifier
                 .textAlign(TextAlign.Center)
                 .fontSize(0.9.cssRem)
-                .color(sitePalette.brand.primary)
+                .color(Colors.Gray)
                 .toAttrs()
         ) {
-            SpanText("Designed and developed by Adrian Cotfas")
+            Text("Designed and developed by Adrian Cotfas © 2025")
         }
     }
 }
@@ -78,8 +122,9 @@ fun Footer(modifier: Modifier = Modifier) {
 
 @Composable
 private fun FooterLink(href: String, text: String, openNewTab: Boolean = false) {
-    val linkModifier = FooterLinkStyle.toModifier()
-        .setVariable(ColorVar, ColorMode.current.toSitePalette().brand.accent)
+    val linkModifier = Modifier
+        .color(Colors.White)
+        .textDecorationLine(TextDecorationLine.None)
 
     val openExternalStrategy = if (openNewTab) OpenLinkStrategy.IN_NEW_TAB else null
 

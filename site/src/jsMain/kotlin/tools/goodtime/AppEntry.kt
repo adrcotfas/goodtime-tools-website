@@ -19,6 +19,8 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
+import kotlinx.browser.document
+import org.w3c.dom.HTMLScriptElement
 
 private const val COLOR_MODE_KEY = "goodtime:colorMode"
 
@@ -46,6 +48,14 @@ fun AppEntry(content: @Composable () -> Unit) {
         val colorMode = ColorMode.current
         LaunchedEffect(colorMode) {
             colorMode.saveToLocalStorage(COLOR_MODE_KEY)
+        }
+
+        LaunchedEffect(Unit) {
+            val script = document.createElement("script") as HTMLScriptElement
+            script.src = "https://buttons.github.io/buttons.js"
+            script.async = true
+            script.defer = true
+            document.head?.appendChild(script)
         }
 
         Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
