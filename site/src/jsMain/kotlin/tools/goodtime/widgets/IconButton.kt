@@ -1,4 +1,4 @@
-package tools.goodtime.components.widgets
+package tools.goodtime.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.ui.Modifier

@@ -2,6 +2,7 @@ package tools.goodtime.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -19,6 +20,7 @@ fun FeatureCard(
     title: String,
     description: List<String>,
     modifier: Modifier = Modifier,
+    isPremium: Boolean = false
 ) {
     Column(
         modifier = modifier
@@ -37,9 +39,25 @@ fun FeatureCard(
                     .fontWeight(600)
                     .margin(bottom = 0.75.cssRem)
             )
+            if (isPremium) {
+                Box(
+                    modifier = Modifier.padding(top = 4.px, bottom = 4.px, left = 8.px, right = 8.px)
+                        .borderRadius(16.px)
+                        .backgroundColor(Colors.White), contentAlignment = Alignment.Center
+                ) {
+                    SpanText(
+                        "Premium",
+                        modifier = Modifier
+                            .fontSize(0.75.cssRem)
+                            .color(Colors.Black)
+                            .fontWeight(600)
+                    )
+                }
+
+            }
         }
 
-        Column {
+        Column() {
             description.forEach {
                 SpanText(
                     it,

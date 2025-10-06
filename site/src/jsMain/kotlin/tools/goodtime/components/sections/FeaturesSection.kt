@@ -81,6 +81,9 @@ fun FeaturesSection() {
                 .padding(2.cssRem)
                 .gap(2.cssRem),
         ) {
+            //TODO: separate cards for "minimalist UI/ swipe gestures".
+            //add more cards and separate PRO vs non pro + add "Premium image where needed
+            //add an extra layer of MORE
             FeatureCard(
                 title = "Focus, Not Fluff",
                 description = listOf(
