@@ -14,7 +14,7 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            description.set("Powered by Kobweb")
+            description.set("")
             head.add {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
             }
