@@ -20,10 +20,55 @@ import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import kotlinx.browser.document
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLLinkElement
 import org.w3c.dom.HTMLScriptElement
+import org.w3c.dom.events.MouseEvent
 
 private const val COLOR_MODE_KEY = "goodtime:colorMode"
+
+private fun setupDragScroll() {
+    val containers = document.querySelectorAll("[data-drag-scroll]")
+
+    for (i in 0 until containers.length) {
+        val element = containers.item(i) as? HTMLElement ?: continue
+        var isDown = false
+        var startX = 0.0
+        var scrollLeft = 0.0
+
+        // Prevent default drag on images inside container
+        element.addEventListener("dragstart", { e ->
+            e.preventDefault()
+        })
+
+        element.addEventListener("mousedown", { e ->
+            val event = e as MouseEvent
+            isDown = true
+            element.style.cursor = "grabbing"
+            startX = event.pageX - element.offsetLeft
+            scrollLeft = element.scrollLeft
+        })
+
+        element.addEventListener("mouseleave", {
+            isDown = false
+            element.style.cursor = "grab"
+        })
+
+        element.addEventListener("mouseup", {
+            isDown = false
+            element.style.cursor = "grab"
+        })
+
+        element.addEventListener("mousemove", { e ->
+            if (!isDown) return@addEventListener
+            val event = e as MouseEvent
+            e.preventDefault()
+            val x = event.pageX - element.offsetLeft
+            val walk = (x - startX) * 2 // Scroll speed multiplier
+            element.scrollLeft = scrollLeft - walk
+        })
+    }
+}
 
 @InitSilk
 fun initColorMode(ctx: InitSilkContext) {
@@ -37,6 +82,11 @@ fun initStyles(ctx: InitSilkContext) {
             Modifier.fillMaxHeight().styleModifier {
                 property("overscroll-behavior", "none")
                 property("user-select", "none")
+            }
+        }
+        registerStyleBase("[data-drag-scroll]::-webkit-scrollbar") {
+            Modifier.styleModifier {
+                property("display", "none")
             }
         }
     }
@@ -65,6 +115,9 @@ fun AppEntry(content: @Composable () -> Unit) {
             favicon.type = "image/png"
             favicon.href = "/favicon.png"
             document.head?.appendChild(favicon)
+
+            // Add drag scroll functionality
+            setupDragScroll()
         }
 
         Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {

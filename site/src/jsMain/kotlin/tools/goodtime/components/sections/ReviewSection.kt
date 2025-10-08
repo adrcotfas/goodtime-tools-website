@@ -91,14 +91,24 @@ fun ReviewsSection() {
 
         val reviews = listOf(
             ReviewCardData(
+                name = "Harley Fine",
+                review = "I am now master of time",
+                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=5a4365d7-534b-4726-9ddc-aa38bd6f7275&corpus=PUBLIC_REVIEWS"
+            ),
+            ReviewCardData(
+                name = "Miggy Antiquina",
+                review = "This is my first time writing a review for an app, I just had to considering the quality of this productivity timer. It's very simple to use and the premium version is cheap AND a one-time purchase. I have been using this app for more than 6 months now and had encountered little trouble. Definitely one of the best productivity apps out there!",
+                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=2996c7a2-b7f5-4491-9169-259216ce2c3d&corpus=PUBLIC_REVIEWS"
+            ),
+            ReviewCardData(
                 name = "David Baimov",
                 review = "The app helps me to track my study hours and keeps me accountable. This app is the best productivity hack I have found",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=16a26d4a-a63f-4cea-bc43-c5ba9e2a739c&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
-                name = "Harley Fine",
-                review = "I am now master of time",
-                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=5a4365d7-534b-4726-9ddc-aa38bd6f7275&corpus=PUBLIC_REVIEWS"
+                name = "Zakir Hussain",
+                review = "Very clean interface, no ads or data collection nonsense. Kudos guys! I bought the premium version just to support them.",
+                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=ddb4b67b-8679-4683-8a65-e492753d15a5&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "Denis Beliy",
@@ -109,11 +119,6 @@ fun ReviewsSection() {
                 name = "Eva Schmidt",
                 review = "Minimal, perfect. This app has truly improved my study habits. So simple to use, I just choose my study block time and break times. I do two short breaks and one long, and this allows me to get chores done and decompress a bit. I've been sooo much more productive with it, and I've recommended it to other students. No cutesy stuff, no junk, just a simple utility. Would be great for interval training too!",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=b5d70174-37f2-408c-983d-b6cd5f5371b6&corpus=PUBLIC_REVIEWS"
-            ),
-            ReviewCardData(
-                name = "Miggy Antiquina",
-                review = "This is my first time writing a review for an app, I just had to considering the quality of this productivity timer. It's very simple to use and the premium version is cheap AND a one-time purchase. I have been using this app for more than 6 months now and had encountered little trouble. Definitely one of the best productivity apps out there!",
-                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=2996c7a2-b7f5-4491-9169-259216ce2c3d&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "Atharava Goyal",
@@ -147,11 +152,6 @@ fun ReviewsSection() {
                 name = "Данил «snecht» Мусихин",
                 review = "Let me tell you right away: if you, like me, were looking for a decent Pomodoro timer, this is it. The interface is streamlined: it's easy to set a Pomodoro and a break, and there's nothing extra on the home page. There are also tags for those who like them, and there are almost no ads. Conclusion: a very useful app.",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=82fd946a-f6ce-4136-bb46-f016d7e52fda&corpus=PUBLIC_REVIEWS"
-            ),
-            ReviewCardData(
-                name = "Zakir Hussain",
-                review = "Very clean interface, no ads or data collection nonsense. Kudos guys! I bought the premium version just to support them.",
-                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=ddb4b67b-8679-4683-8a65-e492753d15a5&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "Aisha Ansar",
@@ -206,7 +206,7 @@ fun ReviewsSection() {
         )
 
         val displayedReviews = when (expandLevel) {
-            0 -> reviews.take(5)
+            0 -> reviews.take(4)
             1 -> reviews.take(10)
             else -> reviews
         }

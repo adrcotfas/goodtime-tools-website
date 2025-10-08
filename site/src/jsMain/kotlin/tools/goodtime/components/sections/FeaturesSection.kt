@@ -1,8 +1,10 @@
 package tools.goodtime.components.sections
 
 import androidx.compose.runtime.*
-import com.varabyte.kobweb.compose.css.ScrollBehavior
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.UserSelect
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -11,6 +13,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
@@ -21,6 +24,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 import tools.goodtime.gradientText
@@ -80,9 +84,6 @@ fun FeaturesSection() {
                 .padding(2.cssRem)
                 .gap(2.cssRem),
         ) {
-            //TODO: separate cards for "minimalist UI/ swipe gestures".
-            //add more cards and separate PRO vs non pro + add "Premium image where needed
-            //add an extra layer of MORE
             FeatureCard(
                 title = "Focus, Not Fluff",
                 description = listOf(
@@ -162,6 +163,58 @@ fun FeaturesSection() {
                 },
                 primary = false,
                 modifier = FeaturesButton.toModifier(),
+            )
+        }
+        Box(modifier = Modifier.fillMaxWidth().overflow { x(Overflow.Hidden) }) {
+            Screenshots()
+        }
+    }
+}
+
+@Composable
+private fun Screenshots() {
+    val screenshots = remember {
+        listOf(
+            "main_fullscreen.png",
+            "main.png",
+            "main_dial.png",
+            "label_list.png",
+            "label_detail.png",
+            "stats_top.png",
+            "stats_bar_chart.png",
+            "stats_bottom.png",
+            "settings_top.png",
+            "settings_bottom.png",
+            "lock_screen.png",
+        )
+    }
+
+    Div(
+        attrs = Modifier
+            .fillMaxWidth()
+            .padding(top = 2.cssRem, leftRight = 2.cssRem)
+            .overflow { x(Overflow.Auto) }
+            .styleModifier {
+                property("display", "flex")
+                property("gap", "1rem")
+                property("flex-shrink", "0")
+                property("min-width", "0")
+                property("cursor", "grab")
+                property("-webkit-overflow-scrolling", "touch")
+                property("scrollbar-width", "none")
+                property("-ms-overflow-style", "none")
+            }
+            .toAttrs {
+                attr("data-drag-scroll", "")
+            }
+    ) {
+        screenshots.forEach { screenshot ->
+            Image(
+                src = "/screenshots/$screenshot",
+                modifier = Modifier
+                    .height(400.px)
+                    .borderRadius(1.cssRem)
+                    .userSelect(UserSelect.None)
             )
         }
     }
