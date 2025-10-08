@@ -21,6 +21,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Img
 import org.jetbrains.compose.web.dom.Source
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
@@ -109,12 +110,13 @@ fun VideoSection() {
         contentAlignment = Alignment.Center
     ) {
         Video(attrs = {
-            width(260)
-            attr("autoplay", "")
-            attr("playsinline", "")
+            width(270)
+            attr("autoplay", "true")
+            attr("playsinline", "true")
             attr("preload", "auto")
-            attr("loop", "")
-            attr("muted", "")
+            attr("loop", "true")
+            attr("muted", "true")
+            attr("defaultMuted", "true")
             nonRightClickable()
         }) {
             Source(attrs = {
@@ -122,10 +124,13 @@ fun VideoSection() {
                 attr("type", "video/mp4")
             })
         }
-        Image(
+        Img(
             src = "/phone.png",
-            modifier = Modifier
-                .width(340.px)
+            attrs = Modifier
+                .width(330.px)
+                .toAttrs {
+                    nonRightClickable()
+                }
         )
     }
 }
