@@ -3,6 +3,7 @@ package tools.goodtime.components.sections
 import androidx.compose.runtime.*
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.css.UserSelect
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -100,11 +101,16 @@ fun FeaturesSection() {
                             .color(Colors.Gray).toAttrs()
                     ) {
                         Text("Strict countdown timers for techniques like ")
-                        Link("https://en.wikipedia.org/wiki/Pomodoro_Technique", "Pomodoro")
+                        Link(
+                            "https://en.wikipedia.org/wiki/Pomodoro_Technique",
+                            "Pomodoro",
+                            modifier = Modifier.textDecorationLine(TextDecorationLine.Underline)
+                        )
                         Text(", or open-ended ")
                         Link(
                             "https://www.lesswrong.com/posts/RWu8eZqbwgB9zaerh/third-time-a-better-way-to-work",
-                            "count-ups"
+                            "count-ups",
+                            modifier = Modifier.textDecorationLine(TextDecorationLine.Underline)
                         )
                         Text(" for deep, uninterrupted flow.")
                     }
