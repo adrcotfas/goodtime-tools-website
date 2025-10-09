@@ -103,6 +103,12 @@ fun AppEntry(content: @Composable () -> Unit) {
         }
 
         LaunchedEffect(Unit) {
+            // Preconnect to GitHub API for faster button loading
+            val preconnectGithub = document.createElement("link") as HTMLLinkElement
+            preconnectGithub.rel = "preconnect"
+            preconnectGithub.href = "https://api.github.com"
+            document.head?.appendChild(preconnectGithub)
+
             // Add GitHub buttons script
             val script = document.createElement("script") as HTMLScriptElement
             script.src = "https://buttons.github.io/buttons.js"
