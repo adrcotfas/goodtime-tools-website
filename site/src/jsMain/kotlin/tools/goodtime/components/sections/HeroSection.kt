@@ -129,6 +129,8 @@ fun VideoSection() {
             attrs = Modifier
                 .width(350.px)
                 .toAttrs {
+                    attr("fetchpriority", "high")
+                    attr("loading", "eager")
                     nonRightClickable()
                 }
         )
