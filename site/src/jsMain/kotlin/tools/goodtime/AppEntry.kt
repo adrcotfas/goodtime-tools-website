@@ -2,10 +2,8 @@ package tools.goodtime
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
-import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.App
 import com.varabyte.kobweb.silk.SilkApp
@@ -35,6 +33,7 @@ private fun setupDragScroll() {
         var isDown = false
         var startX = 0.0
         var scrollLeft = 0.0
+        var offsetLeft = 0.0
 
         // Prevent default drag on images inside container
         element.addEventListener("dragstart", { e ->
@@ -45,7 +44,8 @@ private fun setupDragScroll() {
             val event = e as MouseEvent
             isDown = true
             element.style.cursor = "grabbing"
-            startX = event.pageX - element.offsetLeft
+            offsetLeft = element.offsetLeft.toDouble()
+            startX = event.pageX - offsetLeft
             scrollLeft = element.scrollLeft
         })
 
@@ -63,7 +63,8 @@ private fun setupDragScroll() {
             if (!isDown) return@addEventListener
             val event = e as MouseEvent
             e.preventDefault()
-            val x = event.pageX - element.offsetLeft
+            // Use cached offsetLeft instead of querying element.offsetLeft
+            val x = event.pageX - offsetLeft
             val walk = (x - startX) * 2 // Scroll speed multiplier
             element.scrollLeft = scrollLeft - walk
         })
