@@ -1,5 +1,5 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
-import kotlinx.html.link
+import kotlinx.html.*
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -17,6 +17,39 @@ kobweb {
             description.set("Goodtime Productivity - A minimalist study timer for Android. Stay focused with Pomodoro technique, custom timer profiles, and detailed statistics. Join thousands achieving deep concentration and getting things done.")
             head.add {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
+                // fade-in at load bellow
+                style {
+                    unsafe {
+                        +"""
+                        body {
+                            background-color: black;
+                        }
+                        #_kobweb-root {
+                            opacity: 0;
+                            transition: opacity 0.4s ease-in;
+                        }
+                        #_kobweb-root.loaded {
+                            opacity: 1;
+                        }
+                        """.trimIndent()
+                    }
+                }
+                script {
+                    unsafe {
+                        raw("""
+                        //<![CDATA[
+                        window.addEventListener('load', function() {
+                            setTimeout(function() {
+                                var root = document.getElementById('_kobweb-root');
+                                if (root) {
+                                    root.classList.add('loaded');
+                                }
+                            }, 50);
+                        });
+                        //]]>
+                        """.trimIndent())
+                    }
+                }
             }
         }
     }
