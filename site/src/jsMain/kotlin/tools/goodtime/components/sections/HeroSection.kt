@@ -111,12 +111,16 @@ fun VideoSection() {
     ) {
         Video(attrs = {
             width(270)
-            attr("autoplay", "true")
-            attr("playsinline", "true")
+            attr("autoplay", "")
+            attr("playsinline", "")
             attr("preload", "auto")
-            attr("loop", "true")
-            attr("muted", "true")
-            attr("defaultMuted", "true")
+            attr("loop", "")
+            attr("muted", "")
+            attr("webkit-playsinline", "")
+            attr("x5-playsinline", "")
+            attr("x5-video-player-type", "h5")
+            attr("x5-video-player-fullscreen", "false")
+            attr("poster", "/videos/demo-fallback.webp")
             nonRightClickable()
         }) {
             Source(attrs = {
@@ -124,6 +128,7 @@ fun VideoSection() {
                 attr("type", "video/mp4")
             })
         }
+
         Img(
             src = "/phone.webp",
             attrs = Modifier
@@ -190,7 +195,8 @@ fun HeroSectionContent() {
         }
         Box(
             modifier = Modifier.height(3.5.cssRem).minWidth(160.px).padding(8.px).borderRadius(32.px)
-                .border(width = 1.px, color = Colors.DimGray, style = LineStyle.Solid), contentAlignment = Alignment.Center
+                .border(width = 1.px, color = Colors.DimGray, style = LineStyle.Solid),
+            contentAlignment = Alignment.Center
         ) {
             SpanText(text = "soon on iOS", modifier = Modifier)
         }
