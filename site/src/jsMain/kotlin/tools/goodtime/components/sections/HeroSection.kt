@@ -27,7 +27,9 @@ import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Video
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
+import tools.goodtime.HeroButton
 import tools.goodtime.gradientText
+import tools.goodtime.sectionTitle
 import tools.goodtime.nonRightClickable
 import tools.goodtime.widgets.ButtonShape
 import tools.goodtime.widgets.GradientBox
@@ -146,13 +148,8 @@ fun VideoSection() {
 fun HeroSectionContent() {
     val title = "Enter Deep Concentration"
     val titleModifier = Modifier
-        .gradientText()
-        .fontFamily("RobotoFlex")
+        .sectionTitle()
         .fontSize(3.25.cssRem)
-        .lineHeight(1.15)
-        .margin(bottom = 1.cssRem)
-        .fontWeight(700)
-        .display(DisplayStyle.Block)
 
     Span(attrs = titleModifier.displayUntil(Breakpoint.MD).textAlign(TextAlign.Center).toAttrs()) {
         Text(title)

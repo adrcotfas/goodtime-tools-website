@@ -12,11 +12,9 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
-import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
@@ -25,6 +23,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
+import tools.goodtime.HeroButton
 import tools.goodtime.widgets.LinkButton
 
 val DividerColor by StyleVariable<CSSColorValue>()
@@ -62,16 +61,6 @@ private fun NavLink(path: String, text: String) {
 // The nav header needs a higher z-index to be shown above elements with `position: sticky`
 fun Modifier.navHeaderZIndex() = this.zIndex(10)
 
-val HeroButton = CssStyle {
-    base {
-        // Extra height helps these hero buttons feel a bit more substantial
-        Modifier.width(300.px).setVariable(ButtonVars.Height, 3.25.cssRem)
-    }
-
-    Breakpoint.MD {
-        Modifier.width(150.px)
-    }
-}
 
 @Composable
 fun NavHeader() {

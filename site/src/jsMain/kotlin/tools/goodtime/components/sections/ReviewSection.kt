@@ -1,13 +1,8 @@
 package tools.goodtime.components.sections
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import org.jetbrains.compose.web.dom.Div
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -17,12 +12,12 @@ import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
-import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
-import tools.goodtime.gradientText
+import tools.goodtime.sectionTitle
 import tools.goodtime.widgets.ReviewCard
 import tools.goodtime.widgets.ThemedButton
 
@@ -77,13 +72,8 @@ fun ReviewsSection() {
     Column(modifier = Modifier.id("reviews"), horizontalAlignment = Alignment.CenterHorizontally) {
         val title = "What are users saying"
         val titleModifier = Modifier
-            .gradientText()
-            .fontFamily("RobotoFlex")
+            .sectionTitle()
             .fontSize(2.25.cssRem)
-            .lineHeight(1.15)
-            .margin(bottom = 1.cssRem)
-            .fontWeight(700)
-            .display(DisplayStyle.Block)
 
         Span(attrs = titleModifier.textAlign(TextAlign.Center).toAttrs()) {
             Text(title)

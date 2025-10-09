@@ -13,36 +13,24 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.descendants
 import com.varabyte.kobweb.silk.style.toModifier
-import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
-import tools.goodtime.gradientText
+import tools.goodtime.FeaturesButton
+import tools.goodtime.sectionTitle
 import tools.goodtime.widgets.FeatureCard
 import tools.goodtime.widgets.FeatureCardRich
 import tools.goodtime.widgets.ThemedButton
 
-val FeaturesButton = CssStyle {
-    base {
-        // Extra height helps these hero buttons feel a bit more substantial
-        Modifier.width(300.px).setVariable(ButtonVars.Height, 2.5.cssRem)
-    }
-
-    Breakpoint.MD {
-        Modifier.width(150.px)
-    }
-}
 
 val FeaturesLinkStyle = CssStyle {
     descendants("a") {
@@ -66,13 +54,8 @@ fun FeaturesSection() {
     ) {
         val title = "Minimalist but powerful"
         val titleModifier = Modifier
-            .gradientText()
-            .fontFamily("RobotoFlex")
+            .sectionTitle()
             .fontSize(2.25.cssRem)
-            .lineHeight(1.15)
-            .margin(bottom = 1.cssRem)
-            .fontWeight(700)
-            .display(DisplayStyle.Block)
 
         Span(attrs = titleModifier.textAlign(TextAlign.Center).toAttrs()) {
             Text(title)
