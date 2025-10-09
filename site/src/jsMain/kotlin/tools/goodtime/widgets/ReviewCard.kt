@@ -85,9 +85,13 @@ fun ReviewCard(name: String, review: String, link: String = "") {
                 modifier = Modifier
                     .fontSize(1.cssRem)
             )
-            Button(onClick = {
-                ctx.router.navigateTo(link)
-            }, variant = UnstyledButtonVariant) {
+            Button(
+                onClick = {
+                    ctx.router.navigateTo(link)
+                },
+                modifier = Modifier.ariaLabel("View review on Google Play Store"),
+                variant = UnstyledButtonVariant
+            ) {
                 Image(src = "/link.svg", modifier = Modifier.size(16.px))
             }
         }
