@@ -5,7 +5,7 @@
   <title>Goodtime Productivity - Home</title>
   <meta content="Goodtime Productivity - A minimalist study timer for Android. Stay focused with Pomodoro technique, custom timer profiles, and detailed statistics. Join thousands achieving deep concentration and getting things done." name="description">
   <link href="/favicon.ico" rel="icon">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <link href="/fonts/faces.css" rel="stylesheet">
   <style>body {
     background-color: black;
@@ -18,6 +18,13 @@
     opacity: 1;
 }</style>
   <script>//
+(function() {
+    var viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+    }
+})();
+
 window.addEventListener('load', function() {
     setTimeout(function() {
         var root = document.getElementById('_kobweb-root');

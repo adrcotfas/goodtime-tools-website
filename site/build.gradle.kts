@@ -38,6 +38,13 @@ kobweb {
                     unsafe {
                         raw("""
                         //<![CDATA[
+                        (function() {
+                            var viewport = document.querySelector('meta[name="viewport"]');
+                            if (viewport) {
+                                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                            }
+                        })();
+
                         window.addEventListener('load', function() {
                             setTimeout(function() {
                                 var root = document.getElementById('_kobweb-root');
