@@ -92,17 +92,15 @@ fun Footer(modifier: Modifier = Modifier) {
                 }
 
                 Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
-            }
 
-            A(
-                attrs = Modifier.classNames("github-button").toAttrs {
-                    attr("href", "https://github.com/adrcotfas/goodtime")
-                    attr("data-color-scheme", "no-preference: light; light: light; dark: dark;")
-                    attr("data-size", "large")
-                    attr("data-show-count", "true")
-                    attr("aria-label", "Star adrcotfas/goodtime on GitHub")
+                Link(
+                    "https://github.com/adrcotfas/goodtime",
+                    modifier = Modifier.color(Colors.White).textDecorationLine(TextDecorationLine.None),
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+                ) {
+                    SpanText("GitHub")
                 }
-            ) { Text("Star") }
+            }
         }
 
         // Copyright
