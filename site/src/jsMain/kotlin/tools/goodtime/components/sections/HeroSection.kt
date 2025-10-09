@@ -16,6 +16,8 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
@@ -200,6 +202,14 @@ fun HeroSectionContent() {
     }
 }
 
+val RatingTextStyle = CssStyle.base {
+    Modifier
+        .gradientText()
+        .fontSize(1.25.cssRem)
+        .padding(right = 0.25.cssRem)
+        .fontWeight(700)
+}
+
 @Composable
 fun RatingBrag(modifier: Modifier = Modifier) {
     Column(
@@ -213,11 +223,7 @@ fun RatingBrag(modifier: Modifier = Modifier) {
         ) {
             SpanText(
                 "4.7",
-                Modifier
-                    .gradientText()
-                    .fontSize(1.25.cssRem)
-                    .padding(right = 0.25.cssRem)
-                    .fontWeight(700)
+                RatingTextStyle.toModifier()
             )
             repeat(4) {
                 Image(

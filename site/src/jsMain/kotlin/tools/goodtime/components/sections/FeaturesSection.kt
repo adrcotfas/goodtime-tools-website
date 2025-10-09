@@ -18,6 +18,7 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.selectors.descendants
 import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.cssRem
@@ -43,6 +44,23 @@ val FeaturesLinkStyle = CssStyle {
             property("color", "#50BFACFF")
         }
     }
+}
+
+val ScreenshotsStyle = CssStyle.base {
+    Modifier
+        .fillMaxWidth()
+        .padding(top = 2.cssRem, leftRight = 2.cssRem)
+        .overflow { x(Overflow.Auto) }
+        .styleModifier {
+            property("display", "flex")
+            property("gap", "1rem")
+            property("flex-shrink", "0")
+            property("min-width", "0")
+            property("cursor", "grab")
+            property("-webkit-overflow-scrolling", "touch")
+            property("scrollbar-width", "none")
+            property("-ms-overflow-style", "none")
+        }
 }
 
 @Composable
@@ -179,20 +197,7 @@ private fun Screenshots() {
     }
 
     Div(
-        attrs = Modifier
-            .fillMaxWidth()
-            .padding(top = 2.cssRem, leftRight = 2.cssRem)
-            .overflow { x(Overflow.Auto) }
-            .styleModifier {
-                property("display", "flex")
-                property("gap", "1rem")
-                property("flex-shrink", "0")
-                property("min-width", "0")
-                property("cursor", "grab")
-                property("-webkit-overflow-scrolling", "touch")
-                property("scrollbar-width", "none")
-                property("-ms-overflow-style", "none")
-            }
+        attrs = ScreenshotsStyle.toModifier()
             .toAttrs {
                 attr("data-drag-scroll", "")
             }

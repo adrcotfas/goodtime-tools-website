@@ -14,7 +14,6 @@ import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
-import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
@@ -22,7 +21,6 @@ import com.varabyte.kobweb.silk.style.toModifier
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.A
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
@@ -40,8 +38,8 @@ val FooterStyle = CssStyle {
 
 val FooterLinkStyle = CssStyle.base {
     Modifier
-        .margin(bottom = 0.5.cssRem)
-        .textDecorationLine(TextDecorationLine.Underline)
+        .color(Colors.White)
+        .textDecorationLine(TextDecorationLine.None)
 }
 
 @Composable
@@ -73,33 +71,11 @@ fun Footer(modifier: Modifier = Modifier) {
                 .margin(bottom = 7.px)
                 .gap(1.cssRem),
                 horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center) {
-                Link(
-                    "mailto:contact@goodtime.tools",
-                    modifier = Modifier.color(Colors.White).textDecorationLine(TextDecorationLine.None),
-                    openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
-                ) {
-                    SpanText("Contact")
-                }
-
+                FooterLink("mailto:contact@goodtime.tools", "Contact", true)
                 Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
-
-                Link(
-                    "https://www.linkedin.com/company/goodtime-app/",
-                    modifier = Modifier.color(Colors.White).textDecorationLine(TextDecorationLine.None),
-                    openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
-                ) {
-                    SpanText("LinkedIn")
-                }
-
+                FooterLink("https://www.linkedin.com/company/goodtime-app/", "LinkedIn", true)
                 Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
-
-                Link(
-                    "https://github.com/adrcotfas/goodtime",
-                    modifier = Modifier.color(Colors.White).textDecorationLine(TextDecorationLine.None),
-                    openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
-                ) {
-                    SpanText("GitHub")
-                }
+                FooterLink("https://github.com/adrcotfas/goodtime", "GitHub", true)
             }
         }
 
@@ -120,16 +96,12 @@ fun Footer(modifier: Modifier = Modifier) {
 
 @Composable
 private fun FooterLink(href: String, text: String, openNewTab: Boolean = false) {
-    val linkModifier = Modifier
-        .color(Colors.White)
-        .textDecorationLine(TextDecorationLine.None)
-
     val openExternalStrategy = if (openNewTab) OpenLinkStrategy.IN_NEW_TAB else null
 
     Link(
         href,
         text,
-        linkModifier,
+        modifier = FooterLinkStyle.toModifier(),
         variant = UncoloredLinkVariant,
         openExternalLinksStrategy = openExternalStrategy
     )
