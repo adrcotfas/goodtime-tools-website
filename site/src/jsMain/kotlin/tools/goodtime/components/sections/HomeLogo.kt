@@ -23,7 +23,7 @@ fun HomeLogo() {
             Alignment.Start
         )
     ) {
-        Image(src = "goodtime_logo.png", modifier = Modifier.size(2.5.cssRem))
+        Image(src = "goodtime_logo.webp", modifier = Modifier.size(2.5.cssRem))
         Row {
             SpanText(
                 text = "Goodtime", modifier = Modifier

@@ -175,17 +175,17 @@ fun FeaturesSection() {
 private fun Screenshots() {
     val screenshots = remember {
         listOf(
-            "main_fullscreen.png",
-            "main.png",
-            "main_dial.png",
-            "label_list.png",
-            "label_detail.png",
-            "stats_top.png",
-            "stats_bar_chart.png",
-            "stats_bottom.png",
-            "settings_top.png",
-            "settings_bottom.png",
-            "lock_screen.png",
+            "main_fullscreen.webp",
+            "main.webp",
+            "main_dial.webp",
+            "label_list.webp",
+            "label_detail.webp",
+            "stats_top.webp",
+            "stats_bar_chart.webp",
+            "stats_bottom.webp",
+            "settings_top.webp",
+            "settings_bottom.webp",
+            "lock_screen.webp",
         )
     }
 

@@ -125,9 +125,9 @@ fun VideoSection() {
             })
         }
         Img(
-            src = "/phone.png",
+            src = "/phone.webp",
             attrs = Modifier
-                .width(330.px)
+                .width(350.px)
                 .toAttrs {
                     nonRightClickable()
                 }

@@ -55,7 +55,7 @@ fun Footer(modifier: Modifier = Modifier) {
             openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
         ) {
             Image(
-                src = "/google_play_badge.png",
+                src = "/google_play_badge.webp",
                 description = "Get it on Google Play",
                 modifier = Modifier.height(60.px).margin(bottom = 2.cssRem)
             )
