@@ -116,16 +116,23 @@ fun VideoSection() {
         Video(attrs = {
             width(270)
             attr("autoplay", "")
+            attr("muted", "true")
             attr("playsinline", "")
             attr("preload", "auto")
             attr("loop", "")
-            attr("muted", "")
             attr("webkit-playsinline", "")
             attr("x5-playsinline", "")
             attr("x5-video-player-type", "h5")
             attr("x5-video-player-fullscreen", "false")
             attr("poster", "/videos/demo-fallback.webp")
             nonRightClickable()
+            ref { videoElement ->
+                // Ensure video plays on Chrome desktop
+                videoElement.play().catch { error ->
+                    console.log("Video autoplay failed:", error)
+                }
+                onDispose { }
+            }
         }) {
             Source(attrs = {
                 attr("src", "videos/demo.mp4")
