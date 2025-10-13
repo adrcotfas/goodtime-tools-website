@@ -48,15 +48,17 @@ fun Footer(modifier: Modifier = Modifier) {
         FooterStyle.toModifier().then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Link(
-            GOOGLE_PLAY_STORE_URL,
-            openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
-        ) {
-            Image(
-                src = "/google_play_badge.webp",
-                description = "Get it on Google Play",
-                modifier = Modifier.height(60.px).margin(bottom = 2.cssRem)
-            )
+        Row(modifier = Modifier.margin(bottom = 2.cssRem)) {
+            Link(
+                path = GOOGLE_PLAY_STORE_URL,
+                openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+            ) {
+                Image(
+                    src = "/google_play_badge.webp",
+                    description = "Get it on Google Play",
+                    modifier = Modifier.height(60.px)
+                )
+            }
         }
 
         Row(
@@ -67,10 +69,12 @@ fun Footer(modifier: Modifier = Modifier) {
             horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(modifier = Modifier
-                .margin(bottom = 7.px)
-                .gap(1.cssRem),
-                horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center) {
+            Row(
+                modifier = Modifier
+                    .margin(bottom = 7.px)
+                    .gap(1.cssRem),
+                horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center
+            ) {
                 FooterLink("mailto:contact@goodtime.tools", "Contact", true)
                 Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
                 FooterLink("https://www.linkedin.com/company/goodtime-app/", "LinkedIn", true)
@@ -91,7 +95,6 @@ fun Footer(modifier: Modifier = Modifier) {
         }
     }
 }
-
 
 
 @Composable
