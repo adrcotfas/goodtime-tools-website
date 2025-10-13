@@ -154,7 +154,7 @@ fun ReviewsSection() {
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=d0493192-e3a9-4e68-900a-e9262add9888&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
-                name = "",
+                name = "Jayd Myers",
                 review = "Exactly what I wanted. Lightweight, simple, and it actually works. The free version is robust enough to do the job well, and I was so pleased with the app that I was happy to upgrade to the pro version. The labels weren't something I was looking for but they have been tremendously helpful! Another bonus is that the app works with my Garmin watch so I can have my phone in another room and start or skip breaks from my watch.",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=d1901cc7-95f2-4a0f-a128-957929d84608&corpus=PUBLIC_REVIEWS"
             ),
