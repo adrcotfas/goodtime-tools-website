@@ -52,7 +52,7 @@ fun <T> StaggeredGrid(
                 attrs = Modifier
                     .styleModifier {
                         property("break-inside", "avoid")
-                        property("display", "inline-block")
+                        property("display", "block")
                         property("width", "100%")
                     }
                     .margin(bottom = 2.cssRem)
