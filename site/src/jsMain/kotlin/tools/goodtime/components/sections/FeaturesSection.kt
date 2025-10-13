@@ -70,7 +70,7 @@ fun FeaturesSection() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = FeaturesLinkStyle.toModifier().id("features")
     ) {
-        val title = "Minimalist but powerful"
+        val title = "Minimalist But Powerful"
         val titleModifier = Modifier
             .sectionTitle()
             .fontSize(2.25.cssRem)

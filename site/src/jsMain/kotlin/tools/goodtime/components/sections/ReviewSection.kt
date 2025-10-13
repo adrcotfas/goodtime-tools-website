@@ -70,7 +70,7 @@ data class ReviewCardData(val name: String, val review: String, val link: String
 fun ReviewsSection() {
     var expandLevel by remember { mutableStateOf(0) }
     Column(modifier = Modifier.id("reviews"), horizontalAlignment = Alignment.CenterHorizontally) {
-        val title = "What are users saying"
+        val title = "What Are Users Saying"
         val titleModifier = Modifier
             .sectionTitle()
             .fontSize(2.25.cssRem)
