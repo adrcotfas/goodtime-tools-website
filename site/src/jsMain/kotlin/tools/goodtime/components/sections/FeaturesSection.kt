@@ -65,7 +65,6 @@ val ScreenshotsStyle = CssStyle.base {
 
 @Composable
 fun FeaturesSection() {
-    var showMore by remember { mutableStateOf(false) }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = FeaturesLinkStyle.toModifier().id("features")
@@ -126,52 +125,41 @@ fun FeaturesSection() {
                 )
             )
 
-            if (showMore) {
-                FeatureCard(
-                    title = "Track Progress",
-                    description = listOf(
-                        "Detailed stats show your productivity patterns.",
-                        "Organize by labels, add notes, and manually log sessions you completed offline."
-                    )
+            FeatureCard(
+                title = "Track Progress",
+                description = listOf(
+                    "Detailed stats show your productivity patterns.",
+                    "Organize by labels, add notes, and manually log sessions you completed offline."
                 )
-                FeatureCard(
-                    title = "Timer Customization",
-                    description = listOf(
-                        "Customize timer size, immersive mode, and indicators.",
-                        "Autostart sessions and pick notification styles from sounds to silent flashes."
-                    )
+            )
+            FeatureCard(
+                title = "Timer Customization",
+                description = listOf(
+                    "Customize timer size, immersive mode, and indicators.",
+                    "Autostart sessions and pick notification styles from sounds to silent flashes."
                 )
-                FeatureCard(
-                    title = "Backup and Restore",
-                    description = listOf(
-                        "Automatic local backups plus manual export/import for switching devices.",
-                        "Export to CSV or JSON for external analysis."
-                    )
+            )
+            FeatureCard(
+                title = "Backup and Restore",
+                description = listOf(
+                    "Automatic local backups plus manual export/import for switching devices.",
+                    "Export to CSV or JSON for external analysis."
                 )
-                FeatureCard(
-                    title = "Build the Habit",
-                    description = listOf("Set reminders to keep your productivity routine consistent.")
-                )
-                FeatureCard(
-                    title = "No Interruptions",
-                    description = listOf("Enable Do not Disturb Mode to automatically silence notifications while the timer runs.")
-                )
-                FeatureCard(
-                    title = "Open Source",
-                    description = listOf("Indie-made with no ads or tracking. Open source so you can verify, contribute, or learn.")
-                )
-            }
-        }
-        if (!showMore) {
-            ThemedButton(
-                text = "Show More",
-                onClick = {
-                    showMore = true
-                },
-                primary = false,
-                modifier = FeaturesButton.toModifier(),
+            )
+            FeatureCard(
+                title = "Build the Habit",
+                description = listOf("Set reminders to keep your productivity routine consistent.")
+            )
+            FeatureCard(
+                title = "No Interruptions",
+                description = listOf("Enable Do not Disturb Mode to automatically silence notifications while the timer runs.")
+            )
+            FeatureCard(
+                title = "Open Source",
+                description = listOf("Indie-made with no ads or tracking. Open source so you can verify, contribute, or learn.")
             )
         }
+
         Box(modifier = Modifier.fillMaxWidth().overflow { x(Overflow.Hidden) }) {
             Screenshots()
         }

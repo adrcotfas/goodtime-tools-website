@@ -245,7 +245,7 @@ fun RatingBrag(modifier: Modifier = Modifier) {
         }
 
         SpanText(
-            "20,000+ reviews",
+            "21,000+ reviews",
             Modifier
                 .fontSize(0.85.cssRem)
                 .fontWeight(600)
