@@ -1,6 +1,11 @@
 package tools.goodtime.components.sections
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.width
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -28,6 +33,7 @@ import org.jetbrains.compose.web.dom.Source
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 import org.jetbrains.compose.web.dom.Video
+import org.w3c.dom.HTMLVideoElement
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
 import tools.goodtime.HeroButton
 import tools.goodtime.gradientText
@@ -109,6 +115,9 @@ fun TitleSection() {
 
 @Composable
 fun VideoSection() {
+    var showPlayButton by remember { mutableStateOf(false) }
+    var videoElement by remember { mutableStateOf<HTMLVideoElement?>(null) }
+
     Box(
         Modifier.padding(top = 2.cssRem),
         contentAlignment = Alignment.Center
@@ -126,12 +135,32 @@ fun VideoSection() {
             attr("x5-video-player-fullscreen", "false")
             attr("poster", "/videos/demo-fallback.webp")
             nonRightClickable()
-            ref { videoElement ->
-                // Ensure video plays on Chrome desktop
-                videoElement.play().catch { error ->
-                    console.log("Video autoplay failed:", error)
+            ref { video ->
+                videoElement = video
+
+                // Listen to video events to track actual playback state
+                val onPlaying = { _: dynamic ->
+                    console.log("Video is playing")
+                    showPlayButton = false
                 }
-                onDispose { }
+                val onPause = { _: dynamic ->
+                    console.log("Video paused")
+                    showPlayButton = true
+                }
+
+                video.addEventListener("playing", onPlaying)
+                video.addEventListener("pause", onPause)
+
+                // Try to autoplay - if it fails, show the play button
+                video.play().catch { error ->
+                    console.log("Video autoplay blocked, showing play button:", error)
+                    showPlayButton = true
+                }
+
+                onDispose {
+                    video.removeEventListener("playing", onPlaying)
+                    video.removeEventListener("pause", onPause)
+                }
             }
         }) {
             Source(attrs = {
@@ -147,9 +176,40 @@ fun VideoSection() {
                 .toAttrs {
                     attr("fetchpriority", "high")
                     attr("loading", "eager")
+                    style {
+                        property("pointer-events", "none")
+                    }
                     nonRightClickable()
                 }
         )
+
+        // Play button overlay - only shown when video is not playing
+        if (showPlayButton) {
+            Box(
+                modifier = Modifier
+                    .size(80.px)
+                    .borderRadius(50.percent)
+                    .backgroundColor(rgba(0, 0, 0, 0.7))
+                    .cursor(Cursor.Pointer)
+                    .zIndex(10)
+                    .onClick {
+                        videoElement?.play()?.catch { error ->
+                            console.log("Failed to play video:", error)
+                        }
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                // Play icon triangle
+                Box(
+                    modifier = Modifier
+                        .margin(left = 6.px)
+                        .size(0.px)
+                        .borderLeft(20.px, LineStyle.Solid, Colors.White)
+                        .borderTop(15.px, LineStyle.Solid, Colors.Transparent)
+                        .borderBottom(15.px, LineStyle.Solid, Colors.Transparent)
+                )
+            }
+        }
     }
 }
 
