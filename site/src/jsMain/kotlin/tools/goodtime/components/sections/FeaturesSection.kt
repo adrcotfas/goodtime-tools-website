@@ -65,7 +65,9 @@ val ScreenshotsStyle = CssStyle.base {
 
 @Composable
 fun FeaturesSection() {
-    var showMore by remember { mutableStateOf(false) }
+    // keep this disabled for now
+    var showMore by remember { mutableStateOf(true) }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = FeaturesLinkStyle.toModifier().id("features")

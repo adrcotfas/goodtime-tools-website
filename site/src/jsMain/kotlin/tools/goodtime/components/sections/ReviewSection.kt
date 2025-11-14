@@ -86,9 +86,14 @@ fun ReviewsSection() {
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=5a4365d7-534b-4726-9ddc-aa38bd6f7275&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
-                name = "Miggy Antiquina",
-                review = "This is my first time writing a review for an app, I just had to considering the quality of this productivity timer. It's very simple to use and the premium version is cheap AND a one-time purchase. I have been using this app for more than 6 months now and had encountered little trouble. Definitely one of the best productivity apps out there!",
-                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=2996c7a2-b7f5-4491-9169-259216ce2c3d&corpus=PUBLIC_REVIEWS"
+                name = "Google Play user",
+                review = "This is a great time tracker! If you don't cheat, it really boosts your productivity. The free version is quite efficient—it doesn't constantly charge you money, it's not cluttered with ads, and the app's basic functionality is accessible. Overall, I'm happy—for me, it's the best app in its category \uD83D\uDC4D",
+                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=d3d710b5-a11c-45d4-a878-ee2ea0bf7762&corpus=PUBLIC_REVIEWS"
+            ),
+            ReviewCardData(
+                name = "Eva Schmidt",
+                review = "Minimal, perfect. This app has truly improved my study habits. So simple to use, I just choose my study block time and break times. I do two short breaks and one long, and this allows me to get chores done and decompress a bit. I've been sooo much more productive with it, and I've recommended it to other students. No cutesy stuff, no junk, just a simple utility. Would be great for interval training too!",
+                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=b5d70174-37f2-408c-983d-b6cd5f5371b6&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "David Baimov",
@@ -104,11 +109,6 @@ fun ReviewsSection() {
                 name = "Denis Beliy",
                 review = "I've been searching for a suitable Pomodoro timer for a long time, and this one meets all my expectations. I'm very pleased with the interface, the ability to customize everything, and the option to purchase a premium account permanently.",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=37a0a5ed-6dfb-44ba-b632-a9edef78ccf7&corpus=PUBLIC_REVIEWS"
-            ),
-            ReviewCardData(
-                name = "Eva Schmidt",
-                review = "Minimal, perfect. This app has truly improved my study habits. So simple to use, I just choose my study block time and break times. I do two short breaks and one long, and this allows me to get chores done and decompress a bit. I've been sooo much more productive with it, and I've recommended it to other students. No cutesy stuff, no junk, just a simple utility. Would be great for interval training too!",
-                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=b5d70174-37f2-408c-983d-b6cd5f5371b6&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "Atharava Goyal",
@@ -127,11 +127,6 @@ fun ReviewsSection() {
                 name = "Pavel Ternavskii",
                 review = "notifications work. No ads whatsoever. The entire app, from the simple design to the do not disturb mode feature during a work session, helps you focus on your work. It's clear the developers wrote the app for themselves. Kudos to you!",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=341b2bd9-e055-444c-9f74-c573a391c32d&corpus=PUBLIC_REVIEWS"
-            ),
-            ReviewCardData(
-                name = "Google Play user",
-                review = "This is a great time tracker! If you don't cheat, it really boosts your productivity. The free version is quite efficient—it doesn't constantly charge you money, it's not cluttered with ads, and the app's basic functionality is accessible. Overall, I'm happy—for me, it's the best app in its category \uD83D\uDC4D",
-                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=d3d710b5-a11c-45d4-a878-ee2ea0bf7762&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "Juan Monroy-Nieto", review =
@@ -182,6 +177,11 @@ fun ReviewsSection() {
                 name = "Nilson Cristiano Marcondes Brino",
                 review = "I'm very satisfied with this app. It helps me better understand and manage my time usage on activities. Tags make it easy to detail each timer, which can be viewed later in the statistics report. It helps me stay focused, and in my case, it also helps me remember not to sit at work for too long without breaks, which is beneficial for my health and for generating new ideas.",
                 link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=90d3776e-ea0f-48aa-858e-961b15c30945&corpus=PUBLIC_REVIEWS"
+            ),
+            ReviewCardData(
+                name = "Miggy Antiquina",
+                review = "This is my first time writing a review for an app, I just had to considering the quality of this productivity timer. It's very simple to use and the premium version is cheap AND a one-time purchase. I have been using this app for more than 6 months now and had encountered little trouble. Definitely one of the best productivity apps out there!",
+                link = "https://play.google.com/console/u/0/developers/8401747129284940974/app/4972226269313781186/user-feedback/review-details?reviewId=2996c7a2-b7f5-4491-9169-259216ce2c3d&corpus=PUBLIC_REVIEWS"
             ),
             ReviewCardData(
                 name = "Sarah",
