@@ -57,6 +57,57 @@ kobweb {
                         """.trimIndent())
                     }
                 }
+                script {
+                    type = "application/ld+json"
+                    unsafe {
+                        raw("""
+                        {
+                          "@context": "https://schema.org",
+                          "@type": "Organization",
+                          "@id": "https://goodtime.tools/#org",
+                          "name": "Goodtime",
+                          "url": "https://goodtime.tools/",
+                          "sameAs": [
+                            "https://www.wikidata.org/wiki/Q137556537",
+                            "https://github.com/adrcotfas/Goodtime",
+                            "https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime",
+                            "https://f-droid.org/packages/com.apps.adrcotfas.goodtime/"
+                          ]
+                        }
+                        """.trimIndent())
+                    }
+                }
+                script {
+                    type = "application/ld+json"
+                    unsafe {
+                        raw("""
+                        {
+                          "@context": "https://schema.org",
+                          "@type": "SoftwareApplication",
+                          "@id": "https://goodtime.tools/#app",
+                          "name": "Goodtime",
+                          "applicationCategory": "ProductivityApplication",
+                          "operatingSystem": "Android",
+                          "url": "https://goodtime.tools/",
+                          "description": "Open-source minimalist Pomodoro and focus timer app for Android.",
+                          "publisher": {
+                            "@id": "https://goodtime.tools/#org"
+                          },
+                          "creator": {
+                            "@type": "Person",
+                            "name": "Adrian Cotfas"
+                          },
+                          "downloadUrl": "https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime",
+                          "sameAs": [
+                            "https://www.wikidata.org/wiki/Q137556537",
+                            "https://github.com/adrcotfas/Goodtime",
+                            "https://play.google.com/store/apps/details?id=com.apps.adrcotfas.goodtime",
+                            "https://f-droid.org/packages/com.apps.adrcotfas.goodtime/"
+                          ]
+                        }
+                        """.trimIndent())
+                    }
+                }
             }
         }
     }
