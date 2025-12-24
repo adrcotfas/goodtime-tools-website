@@ -84,6 +84,7 @@ fun ReviewCard(name: String, review: String, link: String = "") {
                 name,
                 modifier = Modifier
                     .fontSize(1.cssRem)
+                    .color(Colors.White)
             )
             Button(
                 onClick = {

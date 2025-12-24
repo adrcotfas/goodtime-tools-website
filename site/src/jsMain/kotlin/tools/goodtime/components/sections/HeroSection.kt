@@ -264,7 +264,7 @@ fun HeroSectionContent() {
                 .border(width = 1.px, color = Colors.DimGray, style = LineStyle.Solid),
             contentAlignment = Alignment.Center
         ) {
-            SpanText(text = "soon on iOS", modifier = Modifier)
+            SpanText(text = "soon on iOS", modifier = Modifier.color(Colors.White))
         }
     }
 }

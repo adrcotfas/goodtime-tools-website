@@ -54,6 +54,7 @@ private fun NavLink(path: String, text: String) {
             .padding(0.5.cssRem)
             .fontSize(1.cssRem)
             .fontWeight(500)
+            .color(Colors.White)
     )
 }
 
@@ -90,8 +91,6 @@ fun NavHeader() {
 }
 
 private fun getNavBackgroundColor(colorMode: ColorMode): Color.Rgb {
-    return when (colorMode) {
-        ColorMode.DARK -> Colors.Black
-        ColorMode.LIGHT -> Colors.White
-    }.copyf(alpha = 0.65f)
+    // Always use black background for consistency across browsers
+    return Colors.Black.copyf(alpha = 0.65f)
 }

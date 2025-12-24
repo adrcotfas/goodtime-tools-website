@@ -5,6 +5,8 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.display
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
@@ -29,12 +31,14 @@ fun HomeLogo() {
                 text = "Goodtime", modifier = Modifier
                     .fontSize(1.3.cssRem)
                     .fontWeight(500)
+                    .color(Colors.White)
                     .display(DisplayStyle.Block)
             )
             SpanText(
                 text = " Productivity", modifier = Modifier
                     .fontSize(1.3.cssRem)
                     .fontWeight(200)
+                    .color(Colors.White)
                     .display(DisplayStyle.Block)
             )
         }

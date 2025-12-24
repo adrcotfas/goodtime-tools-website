@@ -45,15 +45,14 @@ val PrimaryButtonVariant = ButtonStyle.addVariant {
 }
 
 val NormalButtonVariant = ButtonStyle.addVariant {
-    val colorMode = colorMode
     base {
         Modifier
-            .backgroundColor(colorMode.toPalette().background)
+            .backgroundColor(Colors.Black)
             .border(width = 1.px, color = Colors.DimGray, style = LineStyle.Solid)
-            .color(colorMode.toPalette().color)
+            .color(Colors.White)
     }
     hover {
-        Modifier.backgroundColor(colorMode.toPalette().background.shifted(colorMode))
+        Modifier.backgroundColor(Color.rgb(0x1a1a1a))
     }
 }
 

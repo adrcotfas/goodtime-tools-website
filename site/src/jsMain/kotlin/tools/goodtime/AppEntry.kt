@@ -82,7 +82,6 @@ fun initStyles(ctx: InitSilkContext) {
         registerStyleBase("html, body") {
             Modifier.fillMaxHeight().styleModifier {
                 property("overscroll-behavior", "none")
-                property("user-select", "none")
             }
         }
         registerStyleBase("[data-drag-scroll]::-webkit-scrollbar") {
