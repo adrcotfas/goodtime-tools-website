@@ -111,6 +111,9 @@ kobweb {
             }
         }
     }
+    markdown {
+        defaultLayout.set(".components.layouts.MarkdownLayout")
+    }
 }
 
 kotlin {

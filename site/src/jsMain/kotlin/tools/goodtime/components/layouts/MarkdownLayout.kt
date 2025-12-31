@@ -5,6 +5,7 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.OverflowWrap
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.data.add
 import com.varabyte.kobweb.core.init.InitRoute
@@ -23,7 +24,7 @@ import org.jetbrains.compose.web.dom.Div
 import tools.goodtime.toSitePalette
 
 val MarkdownStyle = CssStyle {
-    base { Modifier.fillMaxSize() }
+    base { Modifier.fillMaxSize().color(Colors.White) }
 
     cssRule("h1") {
         Modifier
