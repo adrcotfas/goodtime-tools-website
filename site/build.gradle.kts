@@ -14,7 +14,7 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            description.set("Goodtime Productivity - A minimalist study timer for Android. Stay focused with Pomodoro technique, custom timer profiles, and detailed statistics. Join thousands achieving deep concentration and getting things done.")
+            description.set("Goodtime - A minimalist study timer for Android. Stay focused with Pomodoro technique, custom timer profiles, and detailed statistics. Join thousands achieving deep concentration and getting things done.")
             head.add {
                 link(rel = "stylesheet", href = "/fonts/faces.css")
                 // fade-in at load bellow

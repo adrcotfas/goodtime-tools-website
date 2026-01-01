@@ -12,32 +12,30 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.navigation.Link
+import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
 import com.varabyte.kobweb.silk.components.text.SpanText
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.cssRem
 
 @Composable
 fun HomeLogo() {
-    Row(
-        modifier = Modifier,
-        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(
-            0.5.cssRem,
-            Alignment.Start
-        )
+    Link(
+        path = "/",
+        variant = UndecoratedLinkVariant
     ) {
-        Image(src = "goodtime_logo.webp", modifier = Modifier.size(2.5.cssRem))
-        Row {
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(
+                0.5.cssRem,
+                Alignment.Start
+            )
+        ) {
+            Image(src = "goodtime_logo.webp", modifier = Modifier.size(2.5.cssRem))
             SpanText(
                 text = "Goodtime", modifier = Modifier
                     .fontSize(1.3.cssRem)
                     .fontWeight(500)
-                    .color(Colors.White)
-                    .display(DisplayStyle.Block)
-            )
-            SpanText(
-                text = " Productivity", modifier = Modifier
-                    .fontSize(1.3.cssRem)
-                    .fontWeight(200)
                     .color(Colors.White)
                     .display(DisplayStyle.Block)
             )

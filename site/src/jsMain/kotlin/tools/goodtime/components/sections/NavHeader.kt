@@ -83,8 +83,8 @@ fun NavHeader() {
             ) {
                 LinkButton(GOOGLE_PLAY_STORE_URL, HeroButton.toModifier(), "Download") {
                 }
-                NavLink("#features", "Features")
-                NavLink("#reviews", "Testimonials")
+                NavLink("/#features", "Features")
+                NavLink("/#reviews", "Testimonials")
             }
         }
     }
