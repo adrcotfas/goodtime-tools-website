@@ -42,6 +42,13 @@ val FooterLinkStyle = CssStyle.base {
         .textDecorationLine(TextDecorationLine.None)
 }
 
+val SmallFooterLinkStyle = CssStyle.base {
+    Modifier
+        .color(Colors.White)
+        .textDecorationLine(TextDecorationLine.None)
+        .fontSize(1.cssRem)
+}
+
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
     Column(
@@ -64,14 +71,12 @@ fun Footer(modifier: Modifier = Modifier) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .margin(bottom = 2.cssRem)
                 .gap(1.cssRem),
             horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
                 modifier = Modifier
-                    .margin(bottom = 7.px)
                     .gap(1.cssRem),
                 horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center
             ) {
@@ -83,10 +88,29 @@ fun Footer(modifier: Modifier = Modifier) {
             }
         }
 
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .margin(top = 1.cssRem)
+                .gap(1.cssRem),
+            horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                modifier = Modifier
+                    .margin(bottom = 7.px)
+                    .gap(1.cssRem),
+                horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center
+            ) {
+                SmallFooterLink("/legal", "Privacy & Terms")
+            }
+        }
+
         // Copyright
         Span(
             Modifier
                 .textAlign(TextAlign.Center)
+                .margin(top = 1.cssRem)
                 .fontSize(0.9.cssRem)
                 .color(Colors.Gray)
                 .toAttrs()
@@ -105,6 +129,19 @@ private fun FooterLink(href: String, text: String, openNewTab: Boolean = false) 
         href,
         text,
         modifier = FooterLinkStyle.toModifier(),
+        variant = UncoloredLinkVariant,
+        openExternalLinksStrategy = openExternalStrategy
+    )
+}
+
+@Composable
+private fun SmallFooterLink(href: String, text: String, openNewTab: Boolean = false) {
+    val openExternalStrategy = if (openNewTab) OpenLinkStrategy.IN_NEW_TAB else null
+
+    Link(
+        href,
+        text,
+        modifier = SmallFooterLinkStyle.toModifier(),
         variant = UncoloredLinkVariant,
         openExternalLinksStrategy = openExternalStrategy
     )
