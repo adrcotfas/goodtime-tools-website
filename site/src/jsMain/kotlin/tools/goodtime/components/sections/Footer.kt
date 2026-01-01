@@ -42,13 +42,6 @@ val FooterLinkStyle = CssStyle.base {
         .textDecorationLine(TextDecorationLine.None)
 }
 
-val SmallFooterLinkStyle = CssStyle.base {
-    Modifier
-        .color(Colors.White)
-        .textDecorationLine(TextDecorationLine.None)
-        .fontSize(1.cssRem)
-}
-
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
     Column(
@@ -82,9 +75,7 @@ fun Footer(modifier: Modifier = Modifier) {
             ) {
                 FooterLink("mailto:contact@goodtime.tools", "Contact", true)
                 Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
-                FooterLink("https://www.linkedin.com/company/goodtime-app/", "LinkedIn", true)
-                Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
-                FooterLink("https://github.com/adrcotfas/goodtime", "GitHub", true)
+                FooterLink("/legal", "Terms & Privacy Policy")
             }
         }
 
@@ -98,11 +89,12 @@ fun Footer(modifier: Modifier = Modifier) {
         ) {
             Row(
                 modifier = Modifier
-                    .margin(bottom = 7.px)
                     .gap(1.cssRem),
                 horizontalArrangement = com.varabyte.kobweb.compose.foundation.layout.Arrangement.Center
             ) {
-                SmallFooterLink("/legal", "Privacy & Terms")
+                FooterLink("https://www.linkedin.com/company/goodtime-app/", "LinkedIn", true)
+                Span(Modifier.color(Colors.Gray).toAttrs()) { Text("|") }
+                FooterLink("https://github.com/adrcotfas/goodtime", "GitHub", true)
             }
         }
 
@@ -129,19 +121,6 @@ private fun FooterLink(href: String, text: String, openNewTab: Boolean = false) 
         href,
         text,
         modifier = FooterLinkStyle.toModifier(),
-        variant = UncoloredLinkVariant,
-        openExternalLinksStrategy = openExternalStrategy
-    )
-}
-
-@Composable
-private fun SmallFooterLink(href: String, text: String, openNewTab: Boolean = false) {
-    val openExternalStrategy = if (openNewTab) OpenLinkStrategy.IN_NEW_TAB else null
-
-    Link(
-        href,
-        text,
-        modifier = SmallFooterLinkStyle.toModifier(),
         variant = UncoloredLinkVariant,
         openExternalLinksStrategy = openExternalStrategy
     )
