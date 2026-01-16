@@ -185,7 +185,6 @@ private fun Screenshots() {
     val screenshots = remember {
         listOf(
             "main_fullscreen.webp",
-            "main.webp",
             "main_dial.webp",
             "label_list.webp",
             "label_detail.webp",

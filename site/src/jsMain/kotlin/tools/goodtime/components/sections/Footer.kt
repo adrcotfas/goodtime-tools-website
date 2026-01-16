@@ -3,6 +3,7 @@ package tools.goodtime.components.sections
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -24,6 +25,7 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
+import tools.goodtime.TEST_FLIGHT_URL
 
 val FooterStyle = CssStyle {
     base {
@@ -48,7 +50,7 @@ fun Footer(modifier: Modifier = Modifier) {
         FooterStyle.toModifier().then(modifier),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.margin(bottom = 2.cssRem)) {
+        Row(modifier = Modifier.margin(bottom = 2.cssRem), horizontalArrangement = Arrangement.spacedBy(2.cssRem)) {
             Link(
                 path = GOOGLE_PLAY_STORE_URL,
                 openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
@@ -56,6 +58,16 @@ fun Footer(modifier: Modifier = Modifier) {
                 Image(
                     src = "/google_play_badge.webp",
                     description = "Get it on Google Play",
+                    modifier = Modifier.height(60.px)
+                )
+            }
+            Link(
+                path = TEST_FLIGHT_URL,
+                openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
+            ) {
+                Image(
+                    src = "/test_flight_badge.webp",
+                    description = "Get it on TestFlight",
                     modifier = Modifier.height(60.px)
                 )
             }

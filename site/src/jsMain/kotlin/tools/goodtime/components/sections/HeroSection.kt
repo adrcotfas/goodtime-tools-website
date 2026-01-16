@@ -36,6 +36,7 @@ import org.jetbrains.compose.web.dom.Video
 import org.w3c.dom.HTMLVideoElement
 import tools.goodtime.GOOGLE_PLAY_STORE_URL
 import tools.goodtime.HeroButton
+import tools.goodtime.TEST_FLIGHT_URL
 import tools.goodtime.gradientText
 import tools.goodtime.sectionTitle
 import tools.goodtime.nonRightClickable
@@ -259,13 +260,13 @@ fun HeroSectionContent() {
             )
             RatingBrag(Modifier.padding(left = 1.cssRem, right = 1.cssRem))
         }
-        Box(
-            modifier = Modifier.height(3.5.cssRem).minWidth(160.px).padding(8.px).borderRadius(32.px)
-                .border(width = 1.px, color = Colors.DimGray, style = LineStyle.Solid),
-            contentAlignment = Alignment.Center
-        ) {
-            SpanText(text = "soon on iOS", modifier = Modifier.color(Colors.White))
-        }
+        LinkButton(
+            TEST_FLIGHT_URL,
+            HeroButton.toModifier(),
+            "iOS (Beta)",
+            primary = true,
+            shape = ButtonShape.ROUNDED_RECTANGLE
+        )
     }
 }
 
